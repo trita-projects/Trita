@@ -160,7 +160,7 @@ export default function ContactPage() {
         <Card>
           <div className="text-base font-semibold text-ink-950">Office</div>
           <div className="mt-3 space-y-1 text-sm text-ink-950/70">
-            <div>Mysuru, India</div>
+            <div>1 Floor, "Samputa", 8th Cross, Adipampa Road, V V Mohalla, Mysore 570002</div>
             <div>
               <a className="hover:text-ink-950" href="mailto:hello@trita.example">
                 hello@trita.example

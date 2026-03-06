@@ -8,9 +8,9 @@ export default function AboutPage() {
   return (
     <SiteLayout>
       <header className="space-y-3">
-        <h1 className="text-3xl font-semibold text-ink-950">About Tritā</h1>
+        <h1 className="text-3xl font-semibold text-ink-950">About Trita</h1>
         <p className="max-w-2xl text-sm leading-relaxed text-ink-950/70">
-          Tritā brings together cultural research, thoughtful design, and technology to create playful learning
+          Trita brings together cultural research, thoughtful design, and technology to create playful learning
           experiences rooted in Indian heritage.
         </p>
       </header>
@@ -18,7 +18,7 @@ export default function AboutPage() {
       <section className="mt-10 grid gap-5 md:grid-cols-3">
         <Card>
           <div className="text-base font-semibold text-ink-950">Our Story</div>
-          <p className="mt-2 text-sm text-ink-950/70">Placeholder story narrative for Tritā.</p>
+          <p className="mt-2 text-sm text-ink-950/70">Placeholder story narrative for Trita.</p>
         </Card>
         <Card>
           <div className="text-base font-semibold text-ink-950">Vision</div>
