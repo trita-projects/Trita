@@ -39,7 +39,7 @@ function classesForVariant(variant: ButtonVariant) {
       return "text-ink-950/80 hover:bg-ink-950/5"
     case "primary":
     default:
-      return "bg-gradient-to-br from-marigold-500 via-terracotta-500 to-indigo-600 text-ink-950 hover:from-marigold-600 hover:via-terracotta-600 hover:to-indigo-500"
+      return "bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-500 text-ink-950 hover:from-amber-500 hover:via-yellow-600 hover:to-amber-600"
   }
 }
 

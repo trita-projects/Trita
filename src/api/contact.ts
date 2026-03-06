@@ -17,7 +17,7 @@ export default async function handler(req: GatsbyFunctionRequest, res: GatsbyFun
 
   const apiKey = process.env.RESEND_API_KEY
   const toEmail = process.env.RESEND_TO_EMAIL
-  const fromEmail = "Tritā <no-reply@inf.in>"
+  const fromEmail = "Trita <no-reply@inf.in>"
 
   if (!apiKey) {
     res.status(500).json({ ok: false, error: "Missing RESEND_API_KEY" })

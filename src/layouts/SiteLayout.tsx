@@ -19,7 +19,7 @@ export default function SiteLayout({ children }: SiteLayoutProps) {
     }
   `)
 
-  const siteTitle = (data.site.siteMetadata?.title as string | undefined) ?? `Tritā`
+  const siteTitle = (data.site.siteMetadata?.title as string | undefined) ?? `Trita`
 
   return (
     <div className="min-h-screen bg-sand-50 text-ink-950">

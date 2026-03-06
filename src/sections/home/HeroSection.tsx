@@ -10,7 +10,7 @@ export default function HeroSection() {
 
       <div className="relative">
         <p className="text-xs font-semibold uppercase tracking-[0.24em] text-ink-950/70">
-          Tritā
+          Trita
         </p>
         <h1 className="mt-4 max-w-3xl text-balance text-3xl font-semibold leading-tight text-ink-950 sm:text-5xl">
           Reimagining Indian Culture Through Play, Learning, and Technology

@@ -13,9 +13,9 @@ const IndexPage = () => {
     <SiteLayout>
       <HeroSection />
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold text-ink-950">About Tritā</h2>
+        <h2 className="text-2xl font-semibold text-ink-950">About Trita</h2>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-950/70">
-          Tritā is a culture-and-play studio building games, programs, and digital experiences rooted in Indian
+          Trita is a culture-and-play studio building games, programs, and digital experiences rooted in Indian
           knowledge systems.
         </p>
       </section>

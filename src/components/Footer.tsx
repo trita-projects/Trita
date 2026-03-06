@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className="border-t border-ink-950/10 bg-sand-100 text-ink-950">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-3">
         <div className="space-y-3">
-          <div className="text-base font-semibold">Tritā</div>
+          <div className="text-base font-semibold">Trita</div>
           <p className="text-sm leading-relaxed text-ink-950/70">
             Reimagining Indian culture through play, learning, and technology.
           </p>
@@ -68,7 +68,7 @@ export default function Footer() {
         <div className="space-y-3">
           <div className="text-base font-semibold">Contact</div>
           <div className="space-y-1 text-sm text-ink-950/70">
-            <div>Mysuru, India</div>
+            <div>1 Floor, "Samputa", 8th Cross, Adipampa Road, V V Mohalla, Mysore 570002</div>
             <div>
               <a
                 className="group inline-flex w-fit text-ink-950/70 no-underline transition hover:text-ink-950 hover:no-underline"
@@ -95,8 +95,8 @@ export default function Footer() {
 
       <div className="border-t border-ink-950/10">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 text-xs text-ink-950/60 sm:px-6 md:flex-row md:items-center md:justify-between">
-          <div>© {new Date().getFullYear()} Tritā. All rights reserved.</div>
-          <div className="text-ink-950/60">Built with Gatsby.</div>
+          <div>© {new Date().getFullYear()} Trita. All rights reserved.</div>
+          <div className="text-ink-950/60">Built by Trita.</div>
         </div>
       </div>
     </footer>

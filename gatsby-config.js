@@ -12,7 +12,7 @@ require("dotenv").config({ path: `.env.local` })
  */
 module.exports = {
   siteMetadata: {
-    title: `Tritā`,
+    title: `Trita`,
     description: `Reimagining Indian Culture Through Play, Learning, and Technology.`,
     author: `@trita`,
     siteUrl: `https://trita.example.com/`,
@@ -49,15 +49,15 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Tritā`,
-        short_name: `Tritā`,
+        name: `Trita`,
+        short_name: `Trita`,
         start_url: `/`,
         background_color: `#fbf7ef`,
         // This will impact how browsers show your PWA/website
         // https://css-tricks.com/meta-theme-color-and-trickery/
         theme_color: `#fbf7ef`,
         display: `minimal-ui`,
-        icon: `src/images/trita-logo-512.png`, // This path is relative to the root of the site.
+        icon: `src/images/trita-logo.png`, // This path is relative to the root of the site.
       },
     },
     {
