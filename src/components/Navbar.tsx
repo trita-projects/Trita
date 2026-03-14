@@ -12,8 +12,9 @@ export default function Navbar({ siteTitle }: NavbarProps) {
   const [isOpen, setIsOpen] = React.useState(false)
 
   return (
-    <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-6xl">
-      <div className="flex items-center justify-between rounded-full border border-ink-950/10 bg-white/90 px-2 py-2 shadow-lift backdrop-blur-md transition-all hover:bg-white">
+    <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-6xl pointer-events-none">
+      {/* Desktop Nav Bar */}
+      <div className="flex items-center justify-between rounded-full border border-ink-950/10 bg-white/90 px-3 py-2 shadow-soft backdrop-blur-md transition-shadow hover:shadow-lift lg:px-4 pointer-events-auto">
         <div className="flex items-center gap-2 pl-3">
           <Link to="/" className="group flex items-center gap-3">
             <span className="flex h-12 w-12 items-center justify-center rounded-full bg-sand-100 shadow-soft transition group-hover:scale-105">
@@ -55,8 +56,8 @@ export default function Navbar({ siteTitle }: NavbarProps) {
       <div
         id="mobile-nav"
         className={`${
-          isOpen ? "mt-3 translate-y-0 opacity-100" : "pointer-events-none mt-0 -translate-y-2 opacity-0"
-        } overflow-hidden rounded-3xl border border-ink-950/10 bg-white/95 p-2 shadow-lift backdrop-blur-md transition-all duration-300 lg:hidden`}
+          isOpen ? "pointer-events-auto mt-3 translate-y-0 opacity-100 max-h-[70vh] p-2 border border-ink-950/10" : "pointer-events-none mt-0 -translate-y-2 opacity-0 max-h-0 p-0 border-none"
+        } overflow-hidden rounded-3xl bg-white/95 shadow-lift backdrop-blur-md transition-all duration-300 lg:hidden`}
       >
         <nav className="grid max-h-[70vh] overflow-y-auto gap-1 p-2" aria-label="Mobile">
           {primaryNav.map(item => (

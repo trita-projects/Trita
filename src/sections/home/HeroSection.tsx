@@ -21,8 +21,8 @@ export default function HeroSection() {
   return (
     <section className="relative overflow-hidden rounded-3xl border border-ink-950/10 bg-white shadow-soft">
 
-      <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-marigold-500/20 blur-3xl" />
-      <div className="absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-indigo-600/15 blur-3xl" />
+      <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-marigold-500/20 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-indigo-600/15 blur-3xl" />
 
       <div className="relative grid gap-0 lg:grid-cols-[1fr_auto]">
 
