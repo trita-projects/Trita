@@ -59,7 +59,7 @@ export default function HeroSection() {
           {pillars.map((p, i) => (
             <div
               key={p.title}
-              className={`group flex flex-col gap-1 px-8 py-6 transition hover:bg-sand-50 ${
+              className={`group flex flex-col gap-1 px-8 py-6 transition-all duration-200 lg:hover:bg-sand-50 ${
                 i !== pillars.length - 1 ? "border-b border-ink-950/8" : ""
               }`}
             >

@@ -209,10 +209,11 @@ export default function ProgramsPage() {
           {workshops.map((w, i) => (
             <Reveal key={w.title} delay={i * 70}>
               <a
+                key={w.title}
                 href={w.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex h-full flex-col overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft transition-shadow duration-300 hover:shadow-md no-underline"
+                className="group flex h-full flex-col overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft transition-all duration-300 active:scale-[0.98] lg:hover:shadow-md no-underline"
               >
                 {w.image && (
                   <div className="relative h-40 overflow-hidden bg-sand-50">

@@ -41,7 +41,7 @@ export default function Navbar({ siteTitle }: NavbarProps) {
         <div className="flex items-center gap-1 pr-1 lg:hidden">
           <button
             type="button"
-            className="flex h-10 items-center justify-center rounded-full border border-ink-950/5 bg-ink-950/5 px-5 font-ui text-sm font-bold text-ink-950 transition hover:bg-ink-950/10"
+            className="flex h-10 items-center justify-center rounded-full border border-ink-950/5 bg-ink-950/5 px-5 font-ui text-sm font-bold text-ink-950 transition-all active:scale-95 hover:bg-ink-950/10"
             aria-expanded={isOpen}
             aria-controls="mobile-nav"
             onClick={() => setIsOpen(v => !v)}
@@ -63,7 +63,7 @@ export default function Navbar({ siteTitle }: NavbarProps) {
             <Link
               key={item.to}
               to={item.to}
-              className="flex items-center justify-between rounded-2xl px-5 py-3 font-ui text-base font-bold text-ink-950/80 transition hover:bg-ink-950/5 hover:text-ink-950"
+              className="flex items-center justify-between rounded-2xl px-5 py-3 font-ui text-base font-bold text-ink-950/80 transition-all active:bg-ink-950/5 hover:text-ink-950"
               activeClassName="!bg-marigold-500/10 !text-ink-950"
               onClick={() => setIsOpen(false)}
             >

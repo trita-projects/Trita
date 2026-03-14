@@ -214,7 +214,7 @@ export default function MediaPage() {
                 href={award.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft transition-shadow duration-300 hover:shadow-md no-underline md:flex-row"
+                className="group flex flex-col overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft transition-all duration-300 active:scale-[0.99] lg:hover:shadow-md no-underline md:flex-row"
               >
                 {award.image && (
                   <div className="relative h-52 flex-shrink-0 overflow-hidden bg-sand-50 md:h-auto md:w-72">
@@ -264,7 +264,7 @@ export default function MediaPage() {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex h-full flex-col overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft transition-shadow duration-300 hover:shadow-md no-underline"
+                className="group flex h-full flex-col overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft transition-all duration-300 active:scale-[0.98] lg:hover:shadow-md no-underline"
               >
                 {item.image && (
                   <div className="relative h-40 overflow-hidden bg-sand-50">
