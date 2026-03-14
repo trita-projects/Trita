@@ -150,7 +150,7 @@ export default function ContactPage() {
               <Button type="submit" variant="primary" disabled={status === "sending"} className="px-8 py-3 text-base">
                 {status === "sending" ? "Sending…" : "Submit"}
               </Button>
-              <Button href="mailto:hello@trita.example" variant="secondary" className="px-8 py-3 text-base">
+              <Button href="mailto: namaste@trita.in" variant="secondary" className="px-8 py-3 text-base">
                 Email instead
               </Button>
             </div>
@@ -176,10 +176,10 @@ export default function ContactPage() {
               <span className="font-ui text-xs font-medium uppercase tracking-widest text-ink-950/25">Email</span>
               <div className="mt-2">
                 <a
-                  href="mailto:hello@trita.example"
+                  href="mailto: namaste@trita.in"
                   className="font-ui text-sm font-semibold text-ink-950/70 no-underline transition hover:text-ink-950"
                 >
-                  hello@trita.example
+                   namaste@trita.in
                 </a>
               </div>
             </div>
@@ -190,7 +190,7 @@ export default function ContactPage() {
                   href="tel:+910000000000"
                   className="font-ui text-sm font-semibold text-ink-950/70 no-underline transition hover:text-ink-950"
                 >
-                  +91 00000 00000
+                  +91 93421 84698
                 </a>
               </div>
             </div>

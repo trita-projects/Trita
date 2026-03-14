@@ -100,16 +100,16 @@ export default function Footer() {
                   Mysore 570002
                 </p>
                 <a
-                  href="mailto:hello@trita.example"
+                  href="mailto: namaste@trita.in"
                   className="font-ui text-sm font-semibold text-ink-950/65 no-underline transition hover:text-ink-950"
                 >
-                  hello@trita.example
+                   namaste@trita.in
                 </a>
                 <a
                   href="tel:+910000000000"
                   className="font-ui text-sm font-semibold text-ink-950/65 no-underline transition hover:text-ink-950"
                 >
-                  +91 00000 00000
+                  +91 93421 84698
                 </a>
               </div>
             </div>

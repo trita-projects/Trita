@@ -9,7 +9,7 @@ const sections = [
   { id: `corporates`, label: `Corporates` },
   { id: `cultural`, label: `Cultural Institutions` },
   { id: `retail`, label: `Retail & Distribution` },
-  { id: `research`, label: `Research` },
+  { id: `research`, label: `Get Started` },
 ]
 
 function scrollTo(id: string) {
@@ -258,7 +258,7 @@ export default function CollaboratePage() {
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button to="/contact" className="px-8 py-3 text-base">Use contact form</Button>
-                <Button variant="secondary" href="mailto:hello@trita.example" className="px-8 py-3 text-base">
+                <Button variant="secondary" href="mailto: namaste@trita.in" className="px-8 py-3 text-base">
                   Email us
                 </Button>
               </div>
