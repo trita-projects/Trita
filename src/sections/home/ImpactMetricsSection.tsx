@@ -11,8 +11,8 @@ export default function ImpactMetricsSection() {
   return (
     <section className="mt-14">
       <h2 className="font-heading text-3xl font-bold text-ink-950">Impact Metrics</h2>
-      <p className="mt-3 max-w-2xl font-body text-base leading-relaxed text-ink-950/70">
-        Placeholder metrics for now—swap with real numbers as you gather more data.
+      <p className="mt-3 font-body text-base leading-relaxed text-ink-950/70">
+        By empowering communities through board games, we have helped create a brighter future for families and schools.
       </p>
 
       <div className="mt-8 grid grid-cols-2 overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft lg:grid-cols-4">
