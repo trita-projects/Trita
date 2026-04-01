@@ -149,7 +149,7 @@ function ProductCard({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft transition-all duration-300 active:scale-[0.98] lg:hover:shadow-md no-underline"
+      className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all duration-300 hover:shadow-lift hover:border-primary/40 no-underline"
     >
       {/* Image zone — swap on hover */}
       <div
@@ -188,7 +188,7 @@ function ProductCard({
             {desc}
           </p>
         </div>
-        <span className="font-ui text-sm font-semibold text-ink-950/40 transition group-hover:text-ink-950">
+        <span className="font-ui text-sm font-semibold text-ink-950/40 transition group-hover:text-primary">
           Shop on Roll the Dice →
         </span>
       </div>

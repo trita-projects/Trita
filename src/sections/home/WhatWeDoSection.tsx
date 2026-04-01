@@ -1,4 +1,6 @@
 import * as React from "react"
+import { useRef } from "react"
+import { motion, useScroll, useTransform, useInView } from "framer-motion"
 
 const items = [
   {
@@ -24,39 +26,64 @@ const items = [
 ]
 
 export default function WhatWeDoSection() {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" })
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  })
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"])
+
   return (
-    <section className="mt-14">
-      <h2 className="font-heading text-3xl font-bold text-ink-950">What We Do</h2>
-      <p className="mt-3 max-w-2xl font-body text-base leading-relaxed text-ink-950/70">
-        Our work sits at the intersection of heritage, learning science, and modern design.
-      </p>
+    <section ref={sectionRef} className="relative py-12 px-4 sm:px-6 overflow-hidden">
+      <div className="relative z-10 mx-auto max-w-6xl">
+        <motion.p
+          className="text-sm font-body uppercase tracking-[0.3em] text-muted-foreground"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+        >
+          Our Work
+        </motion.p>
+        <motion.h2
+          className="mt-3 text-3xl font-bold text-foreground sm:text-5xl font-heading"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.15 }}
+        >
+          What We Do
+        </motion.h2>
+        <motion.p
+          className="mt-4 max-w-2xl text-lg text-muted-foreground font-body"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.25 }}
+        >
+          Our work sits at the intersection of heritage, learning science, and
+          modern design.
+        </motion.p>
 
-      <div className="mt-8 grid gap-0 overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft sm:grid-cols-2">
-        {items.map((item, i) => (
-          <div
-            key={item.title}
-            className={`group flex flex-col gap-4 p-6 transition hover:bg-sand-50 sm:p-8
-              ${i % 2 === 0 ? "sm:border-r" : ""} border-ink-950/[0.08]
-              ${i < 2 ? "border-b" : ""} border-ink-950/[0.08]`}
-          >
-
-            <div className="space-y-1">
-              <span className="font-ui text-xs font-medium tracking-widest text-ink-950/25">
-                {item.number}
-              </span>
-              <div className="font-heading text-lg font-bold text-ink-950">{item.title}</div>
-            </div>
-
-            <ul className="flex flex-col gap-2">
-              {item.points.map(p => (
-                <li key={p} className="flex items-center gap-2.5 font-caption text-sm text-ink-950/65">
-                  <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-marigold-500" aria-hidden="true" />
-                  {p}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {items.map((s, i) => (
+            <motion.div
+              key={s.number}
+              className="group rounded-3xl border border-border bg-card/80 backdrop-blur-sm p-8 transition-all hover:shadow-lift hover:border-primary/30"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
+            >
+              <span className="text-3xl font-display font-bold text-primary/25">{s.number}</span>
+              <h3 className="mt-3 text-lg font-bold text-foreground font-heading">{s.title}</h3>
+              <ul className="mt-4 space-y-3">
+                {s.points.map((item) => (
+                  <li key={item} className="flex items-center gap-2.5 text-sm text-muted-foreground font-body">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   )

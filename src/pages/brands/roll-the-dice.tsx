@@ -80,19 +80,19 @@ export default function RollTheDicePage() {
           href={o.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex flex-col overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white p-6 shadow-soft transition-shadow duration-300 hover:shadow-md no-underline"
+          className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-soft transition-all duration-300 hover:shadow-lift hover:border-primary/40 no-underline"
         >
           <div className="flex items-center justify-between">
-            <span className="font-ui text-xs font-medium tracking-widest text-ink-950/25">{o.number}</span>
-            <span className="rounded-full border border-ink-950/[0.12] px-3 py-0.5 font-ui text-xs tracking-wide text-ink-950/45">
+            <span className="font-display text-xs font-medium tracking-widest text-primary/30">{o.number}</span>
+            <span className="rounded-full border border-border bg-muted/10 px-3 py-0.5 font-body text-xs tracking-wide text-muted-foreground">
               {o.tag}
             </span>
           </div>
-          <h3 className="mt-3 font-heading text-lg font-bold text-ink-950 transition group-hover:text-marigold-600">
+          <h3 className="mt-4 font-heading text-lg font-bold text-foreground transition group-hover:text-primary">
             {o.title}
           </h3>
-          <p className="mt-2 font-caption text-sm leading-relaxed text-ink-950/65 flex-1">{o.desc}</p>
-          <span className="mt-4 font-ui text-sm font-semibold text-ink-950/35 transition group-hover:text-ink-950">
+          <p className="mt-2 font-body text-sm leading-relaxed text-muted-foreground flex-1">{o.desc}</p>
+          <span className="mt-4 font-body text-sm font-semibold text-primary/50 transition group-hover:text-primary">
             Explore →
           </span>
         </a>

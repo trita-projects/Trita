@@ -99,33 +99,28 @@ export default function UnCampPage() {
           href={c.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex flex-col overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white p-6 shadow-soft transition-shadow duration-300 hover:shadow-md no-underline"
+          className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-soft transition-all duration-300 hover:shadow-lift hover:border-primary/40 no-underline"
         >
           <div className="flex items-center justify-between">
-            <span className="font-ui text-xs font-medium tracking-widest text-ink-950/25">{c.number}</span>
-            <div className="flex items-center gap-2">
-              <span className="font-ui text-xs text-ink-950/35">{c.age}</span>
-              <span className="rounded-full border border-ink-950/[0.12] px-3 py-0.5 font-ui text-xs tracking-wide text-ink-950/45">
-                {c.tag}
-              </span>
-            </div>
+            <span className="font-display text-xs font-medium tracking-widest text-primary/30">{c.number}</span>
+            <span className="rounded-full border border-border bg-muted/10 px-3 py-0.5 font-body text-xs tracking-wide text-muted-foreground">
+              {c.tag}
+            </span>
           </div>
-          <h3 className="mt-3 font-heading text-lg font-bold text-ink-950 transition group-hover:text-marigold-600">
+          <h3 className="mt-4 font-heading text-lg font-bold text-foreground transition group-hover:text-primary">
             {c.title}
           </h3>
-          <p className="mt-2 flex-1 font-caption text-sm leading-relaxed text-ink-950/65">{c.desc}</p>
-          <div className="mt-3 flex flex-wrap gap-1.5">
+          <p className="font-body text-xs font-semibold text-primary">{c.age}</p>
+          <p className="mt-2 flex-1 font-body text-sm leading-relaxed text-muted-foreground">{c.desc}</p>
+          <div className="mt-4 flex flex-wrap gap-2">
             {c.skills.map(s => (
-              <span
-                key={s}
-                className="rounded-full border border-ink-950/[0.08] bg-sand-50 px-2.5 py-0.5 font-ui text-xs text-ink-950/55"
-              >
+              <span key={s} className="rounded-full bg-surface-warm px-2.5 py-1 font-body text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                 {s}
               </span>
             ))}
           </div>
-          <span className="mt-4 font-ui text-sm font-semibold text-ink-950/35 transition group-hover:text-ink-950">
-            Register →
+          <span className="mt-6 font-body text-sm font-semibold text-primary/50 transition group-hover:text-primary">
+            Join now →
           </span>
         </a>
       ))}

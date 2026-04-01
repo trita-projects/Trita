@@ -133,40 +133,30 @@ function Reveal({ children, delay = 0, className = "" }: {
 export default function CareersPage() {
   return (
     <SiteLayout>
-      <style>{`
-        @keyframes pulse-soft {
-          0%, 100% { opacity: 0.5; }
-          50% { opacity: 1; }
-        }
-      `}</style>
-
       {/* ── Hero ── */}
-      <header className="relative overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white px-8 py-14 text-center shadow-soft sm:px-16">
-        <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-marigold-500/20 blur-3xl" />
-        <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-indigo-600/15 blur-3xl" />
+      <header className="relative overflow-hidden rounded-3xl border border-border bg-card px-8 py-16 text-center shadow-soft sm:px-16">
+        <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-secondary/10 blur-3xl" />
         <div className="relative space-y-4">
-          <div
-            className="inline-block rounded-full border border-ink-950/[0.08] bg-sand-50 px-4 py-1.5 font-ui text-xs font-semibold uppercase tracking-widest text-ink-950/40"
-            style={{ animation: "pulse-soft 3s ease-in-out infinite" }}
-          >
+          <div className="inline-block rounded-full border border-border bg-surface-warm px-4 py-1.5 font-body text-[10px] font-bold uppercase tracking-widest text-primary">
             Internships · Gigs · Full-Time
           </div>
-          <h1 className="font-display text-5xl font-bold tracking-tight text-ink-950 sm:text-6xl">
-            Join the <span className="text-ink-950">Team</span>
+          <h1 className="font-heading text-5xl font-bold tracking-tight text-foreground sm:text-6xl">
+            Join the <span className="text-primary italic">Team</span>
           </h1>
-          <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-ink-950/65">
-            Are you passionate about Indian culture, eager to learn, and ready for hands-on experience? Join Roll the Dice and play a key role in bringing traditional Indian games to communities across the country.
+          <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-muted-foreground">
+            Are you passionate about Indian culture, eager to learn, and ready for hands-on experience? Join Trita and play a key role in bringing traditional Indian games to communities across the country.
           </p>
         </div>
       </header>
 
       {/* ── Section nav ── */}
-      <nav className="mt-10 flex flex-wrap gap-2">
+      <nav className="mt-10 flex flex-wrap justify-center gap-2">
         {sections.map(s => (
           <button
             key={s.id}
             onClick={() => scrollTo(s.id)}
-            className="rounded-2xl border border-ink-950/[0.08] bg-white px-4 py-2 font-ui text-sm font-semibold text-ink-950/60 shadow-soft transition-all active:bg-sand-50 active:text-ink-950 lg:hover:bg-sand-50 lg:hover:text-ink-950"
+            className="rounded-full border border-border bg-card px-5 py-2 font-body text-xs font-bold text-muted-foreground shadow-soft transition-all hover:border-primary/40 hover:text-primary active:scale-95"
           >
             {s.label}
           </button>
@@ -174,189 +164,171 @@ export default function CareersPage() {
       </nav>
 
       {/* ── Why Join ── */}
-      <section id="why" className="mt-16 scroll-mt-28">
-        <Reveal>
-          <h2 className="font-heading text-3xl font-bold text-ink-950">Why Join Roll the Dice?</h2>
-          <p className="mt-2 font-body text-base leading-relaxed text-ink-950/65">
+      <section id="why" className="mt-24 scroll-mt-28">
+        <div className="text-center md:text-left">
+          <h2 className="font-heading text-3xl font-bold text-foreground">Why Join Trita?</h2>
+          <p className="mt-2 font-body text-base leading-relaxed text-muted-foreground">
             A rare opportunity to work on cultural impact — and yes, playing on the job is encouraged.
           </p>
-        </Reveal>
+        </div>
 
-        <div className="mt-8 grid gap-0 overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft sm:grid-cols-2">
-          {whyJoin.map((w, i) => (
-            <Reveal key={w.title} delay={i * 70}>
-              <div className={`flex h-full flex-col gap-2 p-7 transition hover:bg-sand-50
-                ${i % 2 === 0 ? "sm:border-r border-ink-950/[0.08]" : ""}
-                ${i < whyJoin.length - 2 ? "border-b border-ink-950/[0.08]" : ""}`}
-              >
-                <span className="font-ui text-xs font-medium tracking-widest text-ink-950/25">{w.number}</span>
-                <h3 className="font-heading text-lg font-bold text-ink-950">{w.title}</h3>
-                <p className="font-caption text-sm leading-relaxed text-ink-950/65">{w.desc}</p>
-              </div>
-            </Reveal>
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {whyJoin.map((w) => (
+            <div key={w.title} className="flex flex-col gap-4 p-8 rounded-3xl border border-border bg-card shadow-soft transition-all hover:shadow-lift hover:border-primary/30">
+              <span className="font-display text-3xl font-bold text-primary/20">{w.number}</span>
+              <h3 className="font-heading text-xl font-bold text-foreground">{w.title}</h3>
+              <p className="font-body text-sm leading-relaxed text-muted-foreground">{w.desc}</p>
+            </div>
           ))}
         </div>
       </section>
 
       {/* ── Internships ── */}
-      <section id="internships" className="mt-16 scroll-mt-28">
-        <Reveal>
-          <div className="flex items-end justify-between gap-6">
-            <div>
-              <h2 className="font-heading text-3xl font-bold text-ink-950">Internships & Gig Opportunities</h2>
-              <p className="mt-2 font-body text-base leading-relaxed text-ink-950/65">
-                Flexible roles in Mysore, Bangalore, and at events across India.
-              </p>
-            </div>
-            <div className="hidden sm:block">
-              <Button
-                href="https://rollthedice.in/pages/internships-gig-opportunities"
-                variant="secondary"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Full details
-              </Button>
-            </div>
+      <section id="internships" className="mt-24 scroll-mt-28">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div>
+            <h2 className="font-heading text-3xl font-bold text-foreground">Internships & Gig Opportunities</h2>
+            <p className="mt-2 font-body text-base leading-relaxed text-muted-foreground">
+              Flexible roles in Mysore, Bangalore, and at events across India.
+            </p>
           </div>
-        </Reveal>
-
-        <div className="mt-8 grid gap-6 lg:grid-cols-3">
-          {internships.map((role, i) => (
-            <Reveal key={role.title} delay={i * 70}>
-              <div className="flex h-full flex-col overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft">
-                <div className="flex flex-col gap-3 p-6 flex-1">
-                  <div className="flex items-center justify-between">
-                    <span className="font-ui text-xs font-medium tracking-widest text-ink-950/25">{role.number}</span>
-                    <div className="flex items-center gap-2">
-                      <span className="rounded-full bg-marigold-500/15 px-3 py-0.5 font-ui text-xs font-semibold text-marigold-600">
-                        {role.type}
-                      </span>
-                    </div>
-                  </div>
-                  <h3 className="font-heading text-lg font-bold text-ink-950">{role.title}</h3>
-                  <span className="font-ui text-xs text-ink-950/40">{role.location}</span>
-                  <p className="font-caption text-sm leading-relaxed text-ink-950/65">{role.desc}</p>
-                  <div className="flex flex-wrap gap-1.5 pt-1">
-                    {role.skills.map(s => (
-                      <span key={s} className="rounded-full border border-ink-950/[0.08] bg-sand-50 px-2.5 py-0.5 font-ui text-xs text-ink-950/55">
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="border-t border-ink-950/[0.08] px-6 py-4">
-                  <p className="font-caption text-xs text-ink-950/45">
-                    <span className="font-semibold text-ink-950/60">Ideal: </span>{role.ideal}
-                  </p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
+          <div className="hidden sm:block">
+            <Button
+              href="https://rollthedice.in/pages/internships-gig-opportunities"
+              variant="secondary"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full"
+            >
+              Full details
+            </Button>
+          </div>
         </div>
-      </section>
 
-      {/* ── Full-Time Jobs ── */}
-      <section id="jobs" className="mt-16 scroll-mt-28">
-        <Reveal>
-          <div className="flex items-end justify-between gap-6">
-            <div>
-              <h2 className="font-heading text-3xl font-bold text-ink-950">Full-Time Opportunities</h2>
-              <p className="mt-2 font-body text-base leading-relaxed text-ink-950/65">
-                Based in Mysore. Work hard, connect with people, and dive into Indian culture.
-              </p>
-            </div>
-            <div className="hidden sm:block">
-              <Button
-                href="https://rollthedice.in/pages/jobs"
-                variant="secondary"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Full details
-              </Button>
-            </div>
-          </div>
-        </Reveal>
-
-        <div className="mt-8 grid gap-0 overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft sm:grid-cols-2">
-          {jobs.map((job, i) => (
-            <Reveal key={job.title} delay={i * 80}>
-              <div className={`flex h-full flex-col gap-3 p-7 transition hover:bg-sand-50
-                ${i % 2 === 0 ? "sm:border-r border-ink-950/[0.08]" : ""}`}
-              >
+        <div className="mt-10 grid gap-6 lg:grid-cols-3">
+          {internships.map((role) => (
+            <div key={role.title} className="flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all hover:shadow-lift hover:border-primary/30">
+              <div className="flex flex-col gap-4 p-8 flex-1">
                 <div className="flex items-center justify-between">
-                  <span className="font-ui text-xs font-medium tracking-widest text-ink-950/25">{job.number}</span>
-                  <div className="flex items-center gap-2">
-                    <span className="rounded-full border border-ink-950/[0.12] px-3 py-0.5 font-ui text-xs tracking-wide text-ink-950/45">
-                      {job.type}
-                    </span>
-                    <span className="font-ui text-xs text-ink-950/35">{job.location}</span>
-                  </div>
+                  <span className="font-display text-3xl font-bold text-primary/20">{role.number}</span>
+                  <span className="rounded-full bg-primary/10 px-3 py-0.5 font-body text-[10px] font-bold uppercase tracking-wider text-primary">
+                    {role.type}
+                  </span>
                 </div>
-                <h3 className="font-heading text-lg font-bold text-ink-950">{job.title}</h3>
-                <p className="font-caption text-sm leading-relaxed text-ink-950/65">{job.desc}</p>
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {job.skills.map(s => (
-                    <span key={s} className="rounded-full border border-ink-950/[0.08] bg-sand-50 px-2.5 py-0.5 font-ui text-xs text-ink-950/55">
+                <h3 className="font-heading text-xl font-bold text-foreground">{role.title}</h3>
+                <span className="font-body text-xs font-bold text-muted-foreground/40 uppercase tracking-widest">{role.location}</span>
+                <p className="font-body text-sm leading-relaxed text-muted-foreground">{role.desc}</p>
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {role.skills.map(s => (
+                    <span key={s} className="rounded-full bg-surface-warm px-2.5 py-1 font-body text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                       {s}
                     </span>
                   ))}
                 </div>
               </div>
-            </Reveal>
+              <div className="border-t border-border bg-muted/5 px-8 py-5">
+                <p className="font-body text-xs text-muted-foreground leading-relaxed">
+                  <span className="font-bold text-foreground">Ideal: </span>{role.ideal}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Full-Time Jobs ── */}
+      <section id="jobs" className="mt-24 scroll-mt-28">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div>
+            <h2 className="font-heading text-3xl font-bold text-foreground">Full-Time Opportunities</h2>
+            <p className="mt-2 font-body text-base leading-relaxed text-muted-foreground">
+              Based in Mysore. Work hard, connect with people, and dive into Indian culture.
+            </p>
+          </div>
+          <div className="hidden sm:block">
+            <Button
+              href="https://rollthedice.in/pages/jobs"
+              variant="secondary"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full"
+            >
+              Full details
+            </Button>
+          </div>
+        </div>
+
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          {jobs.map((job) => (
+            <div key={job.title} className="flex flex-col gap-4 p-8 rounded-3xl border border-border bg-card shadow-soft transition-all hover:shadow-lift hover:border-primary/30">
+              <div className="flex items-center justify-between">
+                <span className="font-display text-3xl font-bold text-primary/20">{job.number}</span>
+                <div className="flex items-center gap-3">
+                  <span className="rounded-full border border-border bg-primary/10 px-3 py-0.5 font-body text-[10px] font-bold uppercase tracking-wider text-primary">
+                    {job.type}
+                  </span>
+                  <span className="font-body text-xs font-bold text-muted-foreground/40 uppercase tracking-widest">{job.location}</span>
+                </div>
+              </div>
+              <h3 className="font-heading text-xl font-bold text-foreground">{job.title}</h3>
+              <p className="font-body text-sm leading-relaxed text-muted-foreground">{job.desc}</p>
+              <div className="flex flex-wrap gap-2 pt-2">
+                {job.skills.map(s => (
+                  <span key={s} className="rounded-full bg-surface-warm px-2.5 py-1 font-body text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                    {s}
+                  </span>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </section>
 
       {/* ── Apply CTA ── */}
-      <Reveal>
-        <section id="apply" className="mt-16 scroll-mt-28">
-          <div className="relative overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft">
-            <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-marigold-500/20 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-16 -left-16 h-64 w-64 rounded-full bg-indigo-600/15 blur-3xl" />
-            <div className="relative grid gap-0 lg:grid-cols-[1fr_auto]">
-              <div className="flex flex-col justify-between gap-8 p-8 sm:p-12">
-                <div className="space-y-4">
-                  <h2 className="font-display text-4xl font-bold leading-tight tracking-tight text-ink-950 sm:text-5xl">
-                    Ready to <span className="text-ink-950">roll?</span>
-                  </h2>
-                  <p className="max-w-lg font-body text-base leading-relaxed text-ink-950/65">
-                    Send us your details and the role you're interested in. We'll get back to you within a few working days.
-                  </p>
-                </div>
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <Button to="/contact" className="px-8 py-3 text-base">Apply via contact form</Button>
-                  <Button
-                    href="mailto:hello@trita.example"
-                    variant="secondary"
-                    className="px-8 py-3 text-base"
-                  >
-                    Email us directly
-                  </Button>
-                </div>
+      <section id="apply" className="mt-24 scroll-mt-28">
+        <div className="relative overflow-hidden rounded-3xl border border-border bg-card shadow-soft">
+          <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-16 -left-16 h-64 w-64 rounded-full bg-secondary/10 blur-3xl" />
+          <div className="relative grid gap-0 lg:grid-cols-[1fr_auto]">
+            <div className="flex flex-col justify-between gap-8 p-8 sm:p-12">
+              <div className="space-y-4">
+                <h2 className="font-heading text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl">
+                  Ready to <span className="text-primary italic">roll?</span>
+                </h2>
+                <p className="max-w-lg font-body text-base leading-relaxed text-muted-foreground">
+                  Send us your details and the role you're interested in. We'll get back to you within a few working days.
+                </p>
               </div>
-              <div className="flex flex-col justify-center border-t border-ink-950/[0.08] lg:border-l lg:border-t-0">
-                <div className="px-8 pb-4 pt-6 lg:pt-8">
-                  <span className="font-ui text-xs font-medium uppercase tracking-widest text-ink-950/30">
-                    Open roles
-                  </span>
-                </div>
-                {[...internships.map(r => r.title), ...jobs.map(r => r.title)].map((title, i, arr) => (
-                  <div
-                    key={title}
-                    className={`flex items-center gap-3 px-8 py-3.5 ${i !== arr.length - 1 ? "border-b border-ink-950/[0.08]" : "pb-8"}`}
-                  >
-                    <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-marigold-500" />
-                    <span className="font-heading text-sm font-semibold text-ink-950">{title}</span>
-                  </div>
-                ))}
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Button to="/contact" className="px-10 py-3 text-base rounded-full">Apply via contact form</Button>
+                <Button
+                  href="mailto:namaste@trita.in"
+                  variant="secondary"
+                  className="px-10 py-3 text-base rounded-full"
+                >
+                  Email us directly
+                </Button>
               </div>
             </div>
+            <div className="flex flex-col justify-center border-t border-border lg:border-l lg:border-t-0 bg-muted/5">
+              <div className="px-8 pb-4 pt-6 lg:pt-8">
+                <span className="font-display text-xs font-medium uppercase tracking-widest text-primary/40">
+                  Open roles
+                </span>
+              </div>
+              {[...internships.map(r => r.title), ...jobs.map(r => r.title)].map((title, i, arr) => (
+                <div
+                  key={title}
+                  className={`flex items-center gap-3 px-8 py-4 ${i !== arr.length - 1 ? "border-b border-border" : "pb-8"}`}
+                >
+                  <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                  <span className="font-body text-sm font-semibold text-foreground">{title}</span>
+                </div>
+              ))}
+            </div>
           </div>
-        </section>
-      </Reveal>
-
+        </div>
+      </section>
     </SiteLayout>
   )
 }

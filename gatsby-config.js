@@ -52,10 +52,10 @@ module.exports = {
         name: `Trita`,
         short_name: `Trita`,
         start_url: `/`,
-        background_color: `#fbf7ef`,
+        background_color: `#f8f7f4`,
         // This will impact how browsers show your PWA/website
         // https://css-tricks.com/meta-theme-color-and-trickery/
-        theme_color: `#fbf7ef`,
+        theme_color: `#f8f7f4`,
         display: `minimal-ui`,
         icon: `src/images/trita-logo.png`, // This path is relative to the root of the site.
       },

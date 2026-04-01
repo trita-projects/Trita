@@ -56,62 +56,61 @@ export default function BrandsPage() {
     <SiteLayout>
       {/* Header */}
       <header className="space-y-4 text-center">
-        <h1 className="font-display text-5xl font-bold tracking-tight text-ink-950">Our Brands</h1>
-        <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-ink-950/70">
+        <h1 className="font-heading text-5xl font-bold tracking-tight text-foreground">Our Brands</h1>
+        <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-muted-foreground">
           Explore Trita's ecosystem of brands, each with a unique focus on culture, play, and learning.
         </p>
       </header>
 
-      <div className="mt-16 grid gap-6 sm:grid-cols-2">
+      <div className="mt-16 grid gap-8 sm:grid-cols-2">
         {brands.map((b) => (
           <div
             key={b.to}
-            className="group flex flex-col overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft transition-all duration-300 active:scale-[0.99] lg:hover:shadow-md"
+            className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all duration-300 hover:shadow-lift hover:border-primary/40"
           >
             {/* Number + tag */}
-            <div className="flex items-center justify-between px-6 pt-5">
-              <span className="font-ui text-xs font-medium tracking-widest text-ink-950/30">
+            <div className="flex items-center justify-between px-8 pt-6">
+              <span className="font-display text-xs font-medium tracking-widest text-primary/30">
                 {b.number}
               </span>
-              <span className="rounded-full border border-ink-950/[0.15] px-3 py-0.5 font-ui text-xs tracking-wide text-ink-950/50">
+              <span className="rounded-full border border-border bg-muted/10 px-3 py-0.5 font-body text-xs tracking-wide text-muted-foreground">
                 {b.tag}
               </span>
             </div>
 
             {/* Logo */}
-            <div className="mx-6 mt-4 flex items-center justify-center rounded-2xl bg-sand-50 px-8 py-8">
+            <div className="mx-8 mt-6 flex items-center justify-center rounded-2xl bg-surface-warm px-8 py-10">
               <img
                 src={b.image}
                 alt={`${b.title} logo`}
-                className="h-32 w-auto max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                className="h-32 w-auto max-w-full object-contain transition-transform duration-500 group-hover:scale-110"
               />
             </div>
 
             {/* Content */}
-            <div className="flex flex-1 flex-col justify-between gap-4 p-6">
-              <div className="space-y-3">
-                <h2 className="font-ui text-2xl font-extrabold tracking-tight text-ink-950">
+            <div className="flex flex-1 flex-col justify-between gap-6 p-8">
+              <div className="space-y-4">
+                <h2 className="font-heading text-2xl font-bold tracking-tight text-foreground">
                   {b.title}
                 </h2>
-                <p className="font-body text-sm leading-relaxed text-ink-950/65">{b.desc}</p>
+                <p className="font-body text-sm leading-relaxed text-muted-foreground">{b.desc}</p>
 
                 {/* Highlights */}
-                <div className="flex flex-wrap gap-x-4 gap-y-1.5 pt-1">
+                <div className="flex flex-wrap gap-x-4 gap-y-2 pt-2">
                   {b.highlights.map(h => (
-                    <span key={h} className="flex items-center gap-1.5 font-ui text-xs font-semibold text-ink-950/50">
-                      <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-marigold-500" />
+                    <div key={h} className="flex items-center gap-2 text-xs font-body text-muted-foreground font-semibold">
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                       {h}
-                    </span>
+                    </div>
                   ))}
                 </div>
               </div>
 
-              {/* CTAs */}
-              <div className="flex flex-wrap gap-2">
-                <Button href={b.ctaHref} target="_blank" rel="noopener noreferrer">
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                <Button href={b.ctaHref} target="_blank" rel="noopener noreferrer" className="rounded-full px-6 text-xs">
                   {b.cta}
                 </Button>
-                <Button to={b.to} variant="secondary" className="px-5 py-2.5 text-sm">
+                <Button to={b.to} variant="secondary" className="rounded-full px-6 text-xs">
                   Learn more
                 </Button>
               </div>

@@ -38,30 +38,32 @@ export default function BrandPageLayout({
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="transition group-hover:-translate-x-1"
+              className="transition group-hover:-translate-x-1 text-primary"
             >
               <path d="m12 19-7-7 7-7" />
             </svg>
-            <span className="font-ui text-sm font-semibold text-ink-950/70 transition-all group-hover:text-ink-950">
+            <span className="font-body text-sm font-semibold text-muted-foreground transition-all group-hover:text-foreground">
               {subtitle}
             </span>
           </Link>
         </div>
-        <div className="flex items-center gap-4">
-          <img src={logo} alt={`${title} logo`} className="h-20 w-auto max-w-40 object-contain" />
-          <h1 className="font-ui text-4xl font-extrabold tracking-tight text-ink-950">{title}</h1>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-6">
+          <div className="flex items-center justify-center rounded-2xl bg-surface-warm p-4 w-fit">
+            <img src={logo} alt={`${title} logo`} className="h-16 w-auto max-w-40 object-contain" />
+          </div>
+          <h1 className="font-heading text-4xl font-bold tracking-tight text-foreground">{title}</h1>
         </div>
-        <div className="max-w-2xl font-body text-lg leading-relaxed text-ink-950/70">{description}</div>
+        <div className="max-w-2xl font-body text-lg leading-relaxed text-muted-foreground">{description}</div>
         {website && (
           <div className="pt-2">
-            <Button href={website} target="_blank" rel="noopener noreferrer" className="px-8 py-3 text-base">
+            <Button href={website} target="_blank" rel="noopener noreferrer" className="px-8 py-3 text-base rounded-full">
               Visit {new URL(website).hostname}
             </Button>
           </div>
         )}
       </header>
 
-      <section className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">{children}</section>
+      <section className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">{children}</section>
     </SiteLayout>
   )
 }

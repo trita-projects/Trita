@@ -1,78 +1,94 @@
 import * as React from "react"
-
+import { useRef } from "react"
+import { motion, useScroll, useTransform } from "framer-motion"
+import { StaticImage } from "gatsby-plugin-image"
 import Button from "../../components/ui/Button"
 
-const pillars = [
-  {
-    title: `Play-led learning`,
-    desc: `Games as a cultural bridge`,
-  },
-  {
-    title: `Research to design`,
-    desc: `Grounded in lived heritage`,
-  },
-  {
-    title: `Technology with soul`,
-    desc: `Digital preservation & platforms`,
-  },
-]
-
 export default function HeroSection() {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  })
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"])
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"])
+
   return (
-    <section className="relative overflow-hidden rounded-3xl border border-ink-950/10 bg-white shadow-soft">
+    <section ref={ref} className="relative h-screen min-h-[700px] overflow-hidden">
+      {/* Parallax background */}
+      <motion.div className="absolute inset-0 z-0" style={{ y }}>
+        <StaticImage
+          src="../../images/Hero_Image.webp"
+          alt="Traditional Indian board game"
+          className="h-[120%] w-full"
+          imgClassName="object-cover"
+          placeholder="blurred"
+          loading="eager"
+          formats={["webp", "auto"]}
+          quality={85}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-background" />
+      </motion.div>
 
-      <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-marigold-500/20 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-indigo-600/15 blur-3xl" />
+      {/* Content */}
+      <motion.div
+        className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center"
+        style={{ y: textY, opacity }}
+      >
+        <motion.p
+          className="mb-4 text-sm font-body uppercase tracking-[0.3em] text-white/70"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          Trita Infotainment
+        </motion.p>
+        <motion.h1
+          className="max-w-4xl font-heading text-4xl font-bold leading-[1.1] text-white sm:text-5xl md:text-7xl"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
+        >
+          Reimagining Indian Culture Through{" "}
+          <span className="italic text-saffron">Play, Learning</span> & Technology
+        </motion.h1>
+        <motion.p
+          className="mt-6 max-w-2xl font-body text-lg text-white/80"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7 }}
+        >
+          We design experiences that revive traditional games, create cultural
+          learning programs, and build digital platforms that bring families,
+          schools, and communities together.
+        </motion.p>
+        <motion.div
+          className="mt-10 flex flex-wrap justify-center gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9 }}
+        >
+          <Button to="/collaborate" className="px-8 py-3 text-base rounded-full">
+            Collaborate with us
+          </Button>
+          <Button to="/programs" variant="secondary" className="px-8 py-3 text-base bg-white/10 text-white border-white/20 hover:bg-white/20 ring-0 rounded-full">
+            Explore our work
+          </Button>
+        </motion.div>
+      </motion.div>
 
-      <div className="relative grid gap-0 lg:grid-cols-[1fr_auto]">
-
-        <div className="flex flex-col justify-between gap-10 p-8 sm:p-12">
-
-          {/* <div className="flex items-center gap-3">
-            <img src="/trita-logo.png" alt="Trita logo" className="h-10 w-auto" />
-            <span className="font-display text-xs font-semibold uppercase tracking-[0.24em] text-ink-950/50">
-              Trita
-            </span>
-          </div> */}
-
-          <div className="space-y-5">
-            <h1 className="max-w-2xl text-balance font-display text-4xl font-bold leading-[1.1] tracking-tight text-ink-950 sm:text-5xl lg:text-6xl">
-              Reimagining Indian Culture Through{" "}
-              <span className="text-ink-950">Play, Learning & Technology</span>
-            </h1>
-            <p className="max-w-xl font-body text-base leading-relaxed text-ink-950/60 sm:text-lg">
-              We design experiences that revive traditional games, create cultural learning programs,
-              and build digital platforms that bring families, schools, and communities together.
-            </p>
-          </div>
-
-
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Button to="/collaborate">Collaborate with us</Button>
-            <Button to="/programs" variant="secondary">
-              Explore our work
-            </Button>
-          </div>
+      {/* Scroll indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ repeat: Infinity, duration: 2 }}
+      >
+        <div className="h-10 w-6 rounded-full border-2 border-white/40 p-1">
+          <div className="h-2 w-full rounded-full bg-white/60" />
         </div>
-
-        <div className="flex flex-col justify-center gap-0 border-t border-ink-950/8 lg:border-l lg:border-t-0">
-          {pillars.map((p, i) => (
-            <div
-              key={p.title}
-              className={`group flex flex-col gap-1 px-8 py-6 transition-all duration-200 lg:hover:bg-sand-50 ${
-                i !== pillars.length - 1 ? "border-b border-ink-950/8" : ""
-              }`}
-            >
-              <span className="font-ui text-xs font-medium tracking-widest text-ink-950/25">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span className="font-heading text-base font-semibold text-ink-950">{p.title}</span>
-              <span className="font-caption text-sm text-ink-950/55">{p.desc}</span>
-            </div>
-          ))}
-        </div>
-
-      </div>
+      </motion.div>
     </section>
   )
 }

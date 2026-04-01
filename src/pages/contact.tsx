@@ -54,28 +54,27 @@ export default function ContactPage() {
   }
 
   const inputCls =
-    "h-11 w-full rounded-2xl border border-ink-950/[0.08] bg-sand-50 px-4 font-body text-base text-ink-950 outline-none transition-all duration-200 focus:border-marigold-500/60 focus:bg-white focus:ring-2 focus:ring-marigold-500/20 placeholder:text-ink-950/30"
+    "h-11 w-full rounded-2xl border border-border bg-surface-warm px-4 font-body text-base text-foreground outline-none transition-all duration-200 focus:border-primary/60 focus:bg-background focus:ring-2 focus:ring-primary/20 placeholder:text-muted-foreground/30"
 
   return (
     <SiteLayout>
 
       <header className="space-y-4 text-center">
-        <h1 className="font-display text-5xl font-bold tracking-tight text-ink-950">Contact</h1>
-        <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-ink-950/70">
+        <h1 className="font-heading text-5xl font-bold tracking-tight text-foreground">Contact</h1>
+        <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-muted-foreground">
           Reach out for collaborations, programs, or media inquiries.
         </p>
       </header>
 
-      <section className="mt-12 grid gap-6 lg:grid-cols-[2fr_1fr]">
+      <section className="mt-12 grid gap-8 lg:grid-cols-[2fr_1fr]">
 
-        <div className="overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft">
-          <div className="border-b border-ink-950/[0.08] px-8 py-6">
-            <div className="font-heading text-xl font-bold text-ink-950">Send a message</div>
-            <p className="mt-1 font-caption text-sm text-ink-950/55">We usually respond within 1–2 working days.</p>
+        <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-soft">
+          <div className="border-b border-border px-8 py-6 bg-muted/5">
+            <div className="font-heading text-xl font-bold text-foreground">Send a message</div>
+            <p className="mt-1 font-body text-sm text-muted-foreground">We usually respond within 1–2 working days.</p>
           </div>
 
-          <form className="space-y-5 p-8" onSubmit={onSubmit}>
-
+          <form className="space-y-6 p-8" onSubmit={onSubmit}>
             <label className="hidden" aria-hidden="true">
               Company
               <input
@@ -90,9 +89,9 @@ export default function ContactPage() {
               />
             </label>
 
-            <div className="grid gap-5 sm:grid-cols-2">
-              <label className="grid gap-1.5">
-                <span className="font-ui text-sm font-semibold text-ink-950/70">Name</span>
+            <div className="grid gap-6 sm:grid-cols-2">
+              <label className="grid gap-2">
+                <span className="font-body text-sm font-bold text-foreground">Name</span>
                 <input
                   className={inputCls}
                   value={values.name}
@@ -100,8 +99,8 @@ export default function ContactPage() {
                   required
                 />
               </label>
-              <label className="grid gap-1.5">
-                <span className="font-ui text-sm font-semibold text-ink-950/70">Email</span>
+              <label className="grid gap-2">
+                <span className="font-body text-sm font-bold text-foreground">Email</span>
                 <input
                   type="email"
                   className={inputCls}
@@ -112,10 +111,8 @@ export default function ContactPage() {
               </label>
             </div>
 
-            <label className="grid gap-1.5">
-              <span className="font-ui text-sm font-semibold text-ink-950/70">
-                Phone <span className="font-normal text-ink-950/35">(optional)</span>
-              </span>
+            <label className="grid gap-2">
+              <span className="font-body text-sm font-bold text-foreground">Phone (optional)</span>
               <input
                 type="tel"
                 className={inputCls}
@@ -124,72 +121,57 @@ export default function ContactPage() {
               />
             </label>
 
-            <label className="grid gap-1.5">
-              <span className="font-ui text-sm font-semibold text-ink-950/70">Message</span>
+            <label className="grid gap-2">
+              <span className="font-body text-sm font-bold text-foreground">Message</span>
               <textarea
-                className={`${inputCls} h-auto min-h-[140px] py-3`}
+                className={`${inputCls} h-32 py-3 resize-none`}
                 value={values.message}
                 onChange={e => setValues(v => ({ ...v, message: e.target.value }))}
                 required
               />
             </label>
 
-            {status === "success" && (
-              <div className="rounded-2xl bg-indigo-50 px-4 py-3 font-ui text-sm font-semibold text-indigo-600">
-                Thanks — your message has been sent.
-              </div>
-            )}
-
-            {status === "error" && error && (
-              <div className="rounded-2xl bg-terracotta-50 px-4 py-3 font-ui text-sm font-semibold text-terracotta-600">
-                {error}
-              </div>
-            )}
-
-            <div className="flex flex-wrap items-center gap-3 pt-1">
-              <Button type="submit" variant="primary" disabled={status === "sending"} className="px-8 py-3 text-base">
-                {status === "sending" ? "Sending…" : "Submit"}
+            <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
+              <Button
+                type="submit"
+                className="px-10 py-3 text-base rounded-full"
+                disabled={status === "sending"}
+              >
+                {status === "sending" ? "Sending..." : "Send Message"}
               </Button>
-              <Button href="mailto: namaste@trita.in" variant="secondary" className="px-8 py-3 text-base">
-                Email instead
-              </Button>
+
+              {status === "success" && (
+                <p className="font-body text-sm font-bold text-forest">Message sent successfully!</p>
+              )}
+              {status === "error" && (
+                <p className="font-body text-sm font-bold text-destructive">{error || "Error sending message."}</p>
+              )}
             </div>
           </form>
         </div>
 
-        <div className="flex flex-col gap-0 overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft">
-          <div className="border-b border-ink-950/[0.08] px-7 py-6">
-            <span className="font-ui text-xs font-medium uppercase tracking-widest text-ink-950/30">Office</span>
-            <div className="mt-1 font-heading text-xl font-bold text-ink-950">Find us here</div>
+        <div className="space-y-6">
+          <div className="rounded-3xl border border-border bg-card p-8 shadow-soft">
+            <h3 className="font-heading text-lg font-bold text-foreground">Office</h3>
+            <p className="mt-4 font-body text-sm leading-relaxed text-muted-foreground">
+              1 Floor, "Samputa", 8th Cross,<br />
+              Adipampa Road, V V Mohalla,<br />
+              Mysore 570002
+            </p>
           </div>
 
-          <div className="flex flex-col gap-0 flex-1">
-            <div className="border-b border-ink-950/[0.08] px-7 py-5">
-              <span className="font-ui text-xs font-medium uppercase tracking-widest text-ink-950/25">Address</span>
-              <p className="mt-2 font-caption text-sm leading-relaxed text-ink-950/65">
-                1 Floor, "Samputa", 8th Cross,<br />
-                Adipampa Road, V V Mohalla,<br />
-                Mysore 570002
-              </p>
-            </div>
-            <div className="border-b border-ink-950/[0.08] px-7 py-5">
-              <span className="font-ui text-xs font-medium uppercase tracking-widest text-ink-950/25">Email</span>
-              <div className="mt-2">
-                <a
-                  href="mailto: namaste@trita.in"
-                  className="font-ui text-sm font-semibold text-ink-950/70 no-underline transition-all duration-200 active:text-ink-950 lg:hover:text-ink-950"
-                >
-                   namaste@trita.in
+          <div className="rounded-3xl border border-border bg-card p-8 shadow-soft">
+            <h3 className="font-heading text-lg font-bold text-foreground">Direct Contact</h3>
+            <div className="mt-4 space-y-3">
+              <div className="flex flex-col gap-1">
+                <span className="font-display text-[10px] uppercase tracking-widest text-primary/50 font-bold">Email</span>
+                <a href="mailto:namaste@trita.in" className="font-body text-base font-bold text-primary hover:opacity-80">
+                  namaste@trita.in
                 </a>
               </div>
-            </div>
-            <div className="px-7 py-5">
-              <span className="font-ui text-xs font-medium uppercase tracking-widest text-ink-950/25">Phone</span>
-              <div className="mt-2">
-                <a
-                  href="tel:+919342184698"
-                  className="font-ui text-sm font-semibold text-ink-950/70 no-underline transition-all duration-200 active:text-ink-950 lg:hover:text-ink-950"
-                >
+              <div className="flex flex-col gap-1">
+                <span className="font-display text-[10px] uppercase tracking-widest text-primary/50 font-bold">Phone</span>
+                <a href="tel:+919342184698" className="font-body text-base font-bold text-primary hover:opacity-80">
                   +91 93421 84698
                 </a>
               </div>
