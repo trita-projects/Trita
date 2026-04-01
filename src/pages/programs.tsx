@@ -1,10 +1,8 @@
 import * as React from "react"
-
+import { motion } from "framer-motion"
 import SiteLayout from "../layouts/SiteLayout"
 import Seo from "../components/Seo"
 import Button from "../components/ui/Button"
-
-// ─── Data ─────────────────────────────────────────────────────────────────────
 
 const workshops = [
   {
@@ -100,275 +98,223 @@ const experienceTypes = [
   { label: `Experiential Game Installations`, desc: `Large-format traditional game sets for festivals, museums, and corporate spaces.` },
 ]
 
-// ─── Scroll animation ──────────────────────────────────────────────────────────
-
-function useReveal(threshold = 0.12) {
-  const ref = React.useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = React.useState(false)
-  React.useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect() } },
-      { threshold }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [threshold])
-  return { ref, visible }
-}
-
-function Reveal({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
-  const { ref, visible } = useReveal()
-  return (
-    <div
-      ref={ref}
-      className={className}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(24px)",
-        transition: `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms`,
-      }}
-    >
-      {children}
-    </div>
-  )
-}
-
-
 export default function ProgramsPage() {
   return (
     <SiteLayout>
-      <style>{`
-        @keyframes pulse-soft {
-          0%, 100% { opacity: 0.5; }
-          50% { opacity: 1; }
-        }
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee { animation: marquee 30s linear infinite; }
-      `}</style>
-
       {/* ── Hero header ── */}
-      <header className="relative overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white px-8 py-14 text-center shadow-soft sm:px-16">
-        <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-marigold-500/20 blur-3xl" />
-        <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-indigo-600/15 blur-3xl" />
+      <header className="relative overflow-hidden rounded-3xl border border-border bg-card px-8 py-16 text-center shadow-soft sm:px-16">
+        <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-secondary/10 blur-3xl" />
         <div className="relative space-y-4">
-          <div
-            className="inline-block rounded-full border border-ink-950/[0.08] bg-sand-50 px-4 py-1.5 font-ui text-xs font-semibold uppercase tracking-widest text-ink-950/40"
-            style={{ animation: "pulse-soft 3s ease-in-out infinite" }}
-          >
+          <div className="inline-block rounded-full border border-border bg-surface-warm px-4 py-1.5 font-body text-[10px] font-bold uppercase tracking-widest text-primary">
             Workshops · Events · Experiences
           </div>
-          <h1 className="font-display text-5xl font-bold tracking-tight text-ink-950 sm:text-6xl">
-            Programs &{" "}
-            <span className="text-ink-950">Experiences</span>
+          <h1 className="font-heading text-5xl font-bold tracking-tight text-foreground sm:text-6xl">
+            Programs & <span className="text-primary italic">Experiences</span>
           </h1>
-          <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-ink-950/65">
+          <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-muted-foreground">
             Workshops, leagues, festivals, and play-led learning experiences — bringing traditional Indian games into schools, workplaces, and communities.
           </p>
         </div>
       </header>
 
-      {/* ── Marquee ── */}
-      <div className="mt-10 overflow-hidden rounded-2xl border border-ink-950/[0.08] bg-sand-50 py-3">
-        <div className="flex animate-marquee whitespace-nowrap">
-          {[...Array(2)].map((_, ri) => (
-            <span key={ri} className="flex items-center">
-              {[`Board Game Workshops`, `School Programs`, `Corporate Events`, `Community Leagues`, `Cultural Festivals`, `Teacher Training`, `Family Play`, `Game Installations`].map((item, i) => (
-                <span key={i} className="mx-6 font-ui text-xs font-semibold uppercase tracking-widest text-ink-950/35">
-                  {item}<span className="ml-6 text-marigold-500">◆</span>
+      {/* ── Workshops ── */}
+      <section className="mt-24">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div>
+            <h2 className="font-heading text-3xl font-bold text-foreground">Workshops</h2>
+            <p className="mt-2 font-body text-base leading-relaxed text-muted-foreground">
+              Structured, facilitated sessions for schools, corporates, and communities.
+            </p>
+          </div>
+          <div className="hidden sm:block">
+            <Button href="https://rollthedice.in/pages/schools-montessori" variant="secondary" target="_blank" rel="noopener noreferrer" className="rounded-full">
+              School programs
+            </Button>
+          </div>
+        </div>
+
+        <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {workshops.map((w, i) => (
+            <motion.a
+              key={w.title}
+              href={w.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all duration-300 hover:shadow-lift hover:border-primary/40 no-underline"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+            >
+              {w.image && (
+                <div className="relative h-48 overflow-hidden bg-surface-warm">
+                  <img
+                    src={w.image}
+                    alt={w.title}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+              )}
+              <div className="flex flex-1 flex-col justify-between gap-6 p-8">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="font-display text-3xl font-bold text-primary/20">{w.number}</span>
+                    <span className="rounded-full border border-border bg-muted/10 px-3 py-0.5 font-body text-[10px] font-bold uppercase tracking-wide text-muted-foreground">{w.tag}</span>
+                  </div>
+                  <h3 className="font-heading text-xl font-bold text-foreground transition group-hover:text-primary leading-snug">{w.title}</h3>
+                  <p className="font-body text-sm leading-relaxed text-muted-foreground">{w.desc}</p>
+                </div>
+                <span className="font-body text-sm font-bold text-primary transition group-hover:opacity-80">
+                  Learn more →
                 </span>
-              ))}
-            </span>
+              </div>
+            </motion.a>
           ))}
         </div>
-      </div>
-
-      {/* ── Workshops ── */}
-      <section className="mt-16">
-        <Reveal>
-          <div className="flex items-end justify-between gap-6">
-            <div>
-              <h2 className="font-heading text-3xl font-bold text-ink-950">Workshops</h2>
-              <p className="mt-2 font-body text-base leading-relaxed text-ink-950/65">
-                Structured, facilitated sessions for schools, corporates, and communities.
-              </p>
-            </div>
-            <div className="hidden sm:block">
-              <Button href="https://rollthedice.in/pages/schools-montessori" variant="secondary" target="_blank" rel="noopener noreferrer">
-                School programs
-              </Button>
-            </div>
-          </div>
-        </Reveal>
-
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {workshops.map((w, i) => (
-            <Reveal key={w.title} delay={i * 70}>
-              <a
-                key={w.title}
-                href={w.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex h-full flex-col overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft transition-all duration-300 active:scale-[0.98] lg:hover:shadow-md no-underline"
-              >
-                {w.image && (
-                  <div className="relative h-40 overflow-hidden bg-sand-50">
-                    <img
-                      src={w.image}
-                      alt={w.title}
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-                )}
-                <div className="flex flex-1 flex-col justify-between gap-4 p-6">
-                  <div className="space-y-1.5">
-                    <div className="flex items-center justify-between">
-                      <span className="font-ui text-xs font-medium tracking-widest text-ink-950/25">{w.number}</span>
-                      <span className="rounded-full border border-ink-950/[0.12] px-3 py-0.5 font-ui text-xs tracking-wide text-ink-950/45">{w.tag}</span>
-                    </div>
-                    <h3 className="font-heading text-lg font-bold text-ink-950 transition group-hover:text-marigold-600">{w.title}</h3>
-                    <p className="font-caption text-sm leading-relaxed text-ink-950/65">{w.desc}</p>
-                  </div>
-                  <span className="font-ui text-sm font-semibold text-ink-950/35 transition group-hover:text-ink-950">
-                    Learn more →
-                  </span>
-                </div>
-              </a>
-            </Reveal>
-          ))}
+        <div className="mt-6 sm:hidden">
+          <Button href="https://rollthedice.in/pages/schools-montessori" variant="secondary" target="_blank" rel="noopener noreferrer" className="w-full rounded-full">
+            School programs
+          </Button>
         </div>
       </section>
 
       {/* ── Upcoming Events ── */}
-      <section className="mt-16">
-        <Reveal>
-          <h2 className="font-heading text-3xl font-bold text-ink-950">Upcoming Events</h2>
-          <p className="mt-2 font-body text-base leading-relaxed text-ink-950/65">
-            Online and in-person events — leagues, webinars, and community competitions.
-          </p>
-        </Reveal>
+      <section className="mt-24">
+        <h2 className="font-heading text-3xl font-bold text-foreground">Upcoming Events</h2>
+        <p className="mt-2 font-body text-base leading-relaxed text-muted-foreground">
+          Online and in-person events — leagues, webinars, and community competitions.
+        </p>
 
-        <div className="mt-8 grid gap-0 overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft sm:grid-cols-2">
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
           {upcomingEvents.map((e, i) => (
-            <Reveal key={e.title} delay={i * 80}>
-              <div className={`flex flex-col gap-3 p-7 transition hover:bg-sand-50 h-full
-                ${i % 2 === 0 ? "sm:border-r border-ink-950/[0.08]" : ""}
-                ${i < upcomingEvents.length - 2 ? "border-b border-ink-950/[0.08]" : ""}`}
-              >
-                <div className="flex items-center gap-2">
-                  <span className="rounded-full bg-marigold-500/15 px-3 py-0.5 font-ui text-xs font-semibold text-marigold-600">
-                    {e.type}
-                  </span>
-                  <span className="font-ui text-xs text-ink-950/35">{e.date}</span>
-                </div>
-                <h3 className="font-heading text-lg font-bold text-ink-950">{e.title}</h3>
-                <p className="font-caption text-sm leading-relaxed text-ink-950/65">{e.desc}</p>
-                <span className="font-ui text-xs text-ink-950/30">{e.location}</span>
+            <motion.div
+              key={e.title}
+              className="flex flex-col gap-4 p-8 rounded-3xl border border-border bg-card shadow-soft transition-all hover:shadow-lift hover:border-primary/30 h-full"
+              initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3">
+                <span className="rounded-full bg-primary/10 px-3 py-0.5 font-body text-[10px] font-bold uppercase tracking-widest text-primary">
+                  {e.type}
+                </span>
+                <span className="font-body text-xs font-bold text-muted-foreground/50">{e.date}</span>
               </div>
-            </Reveal>
+              <h3 className="font-heading text-xl font-bold text-foreground">{e.title}</h3>
+              <p className="font-body text-sm leading-relaxed text-muted-foreground">{e.desc}</p>
+              <span className="font-body text-xs font-bold text-muted-foreground/40 uppercase tracking-widest">{e.location}</span>
+            </motion.div>
           ))}
         </div>
       </section>
 
       {/* ── Past Events ── */}
-      <section className="mt-16">
-        <Reveal>
-          <div className="flex items-end justify-between gap-6">
-            <div>
-              <h2 className="font-heading text-3xl font-bold text-ink-950">Past Events</h2>
-              <p className="mt-2 font-body text-base leading-relaxed text-ink-950/65">
-                Exhibitions, festivals, and showcases from across India.
-              </p>
-            </div>
-            <div className="hidden sm:block">
-              <Button href="https://rollthedice.in/pages/events" variant="secondary" target="_blank" rel="noopener noreferrer">
-                View all events
-              </Button>
-            </div>
+      <section className="mt-24">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div>
+            <h2 className="font-heading text-3xl font-bold text-foreground">Past Events</h2>
+            <p className="mt-2 font-body text-base leading-relaxed text-muted-foreground">
+              Exhibitions, festivals, and showcases from across India.
+            </p>
           </div>
-        </Reveal>
+          <div className="hidden sm:block">
+            <Button href="https://rollthedice.in/pages/events" variant="secondary" target="_blank" rel="noopener noreferrer" className="rounded-full">
+              View all events
+            </Button>
+          </div>
+        </div>
 
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {pastEvents.map((e, i) => (
-            <Reveal key={e.title} delay={i * 60}>
-              <div className="group flex flex-col overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft">
-                <div className="relative overflow-hidden bg-sand-50" style={{ aspectRatio: "4/3" }}>
-                  <img
-                    src={e.image}
-                    alt={e.title}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 flex items-end bg-gradient-to-t from-ink-950/50 to-transparent p-4">
-                    <span className="rounded-xl bg-white/90 px-2.5 py-1 font-ui text-xs font-semibold text-ink-950">
-                      {e.type}
-                    </span>
-                  </div>
-                </div>
-                <div className="flex flex-col gap-1 p-5">
-                  <h3 className="font-heading text-sm font-bold text-ink-950 leading-snug">{e.title}</h3>
-                  <span className="font-ui text-xs text-ink-950/40">{e.date} · {e.location}</span>
+            <motion.div
+              key={e.title}
+              className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all hover:shadow-lift hover:border-primary/40"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.05 }}
+            >
+              <div className="relative overflow-hidden bg-surface-warm aspect-[4/3]">
+                <img
+                  src={e.image}
+                  alt={e.title}
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/60 to-transparent p-6">
+                  <span className="rounded-full bg-white/90 px-3 py-1 font-body text-[10px] font-bold uppercase tracking-wider text-black">
+                    {e.type}
+                  </span>
                 </div>
               </div>
-            </Reveal>
+              <div className="flex flex-col gap-2 p-6">
+                <h3 className="font-heading text-base font-bold text-foreground leading-snug">{e.title}</h3>
+                <span className="font-body text-xs font-bold text-muted-foreground/50">{e.date} · {e.location}</span>
+              </div>
+            </motion.div>
           ))}
+        </div>
+        <div className="mt-6 sm:hidden">
+          <Button href="https://rollthedice.in/pages/events" variant="secondary" target="_blank" rel="noopener noreferrer" className="w-full rounded-full">
+            View all events
+          </Button>
         </div>
       </section>
 
-      {/* ── Experience types ── */}
-      <section className="mt-16">
-        <Reveal>
-          <h2 className="font-heading text-3xl font-bold text-ink-950">How We Show Up</h2>
-          <p className="mt-2 font-body text-base leading-relaxed text-ink-950/65">
-            The different formats we use to bring traditional games into the world.
-          </p>
-        </Reveal>
+      {/* ── How We Show Up ── */}
+      <section className="mt-24">
+        <h2 className="font-heading text-3xl font-bold text-foreground">How We Show Up</h2>
+        <p className="mt-2 font-body text-base leading-relaxed text-muted-foreground">
+          The different formats we use to bring traditional games into the world.
+        </p>
 
-        <div className="mt-8 grid gap-0 overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft sm:grid-cols-2">
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
           {experienceTypes.map((e, i) => (
-            <Reveal key={e.label} delay={i * 60}>
-              <div className={`flex flex-col gap-2 p-7 transition hover:bg-sand-50 h-full
-                ${i % 2 === 0 ? "sm:border-r border-ink-950/[0.08]" : ""}
-                ${i < experienceTypes.length - 2 ? "border-b border-ink-950/[0.08]" : ""}`}
-              >
-                <span className="font-ui text-xs font-medium tracking-widest text-ink-950/25">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="font-heading text-lg font-bold text-ink-950">{e.label}</h3>
-                <p className="font-caption text-sm leading-relaxed text-ink-950/65">{e.desc}</p>
-              </div>
-            </Reveal>
+            <motion.div
+              key={e.label}
+              className="flex flex-col gap-4 p-8 rounded-3xl border border-border bg-card shadow-soft transition-all hover:shadow-lift hover:border-primary/30 h-full"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+            >
+              <span className="font-display text-3xl font-bold text-primary/20">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="font-heading text-xl font-bold text-foreground leading-snug">{e.label}</h3>
+              <p className="font-body text-sm leading-relaxed text-muted-foreground">{e.desc}</p>
+            </motion.div>
           ))}
         </div>
       </section>
 
       {/* ── CTA ── */}
-      <Reveal>
-        <section className="mt-16">
-          <div className="relative overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white p-8 text-center shadow-soft sm:p-12">
-            <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-marigold-500/20 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-16 -left-16 h-64 w-64 rounded-full bg-indigo-600/15 blur-3xl" />
-            <div className="relative space-y-4">
-              <h2 className="font-display text-3xl font-bold text-ink-950 sm:text-4xl">
-                Want to host a program?
-              </h2>
-              <p className="mx-auto max-w-lg font-body text-base leading-relaxed text-ink-950/65">
-                We bring traditional Indian games to your school, office, festival, or community. Get in touch to design a format that fits.
-              </p>
-              <div className="flex flex-col items-center gap-3 pt-2 sm:flex-row sm:justify-center">
-                <Button to="/collaborate" className="px-8 py-3 text-base">Collaborate with us</Button>
-                <Button href="https://rollthedice.in/pages/events" variant="secondary" target="_blank" rel="noopener noreferrer" className="px-8 py-3 text-base">
-                  All events →
-                </Button>
-              </div>
+      <section className="mt-24">
+        <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-12 text-center shadow-soft sm:p-20">
+          <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-20 -left-20 h-80 w-80 rounded-full bg-secondary/10 blur-3xl" />
+          <div className="relative space-y-6">
+            <h2 className="font-heading text-4xl font-bold text-foreground sm:text-5xl">
+              Want to <span className="text-primary italic">host</span> a program?
+            </h2>
+            <p className="mx-auto max-w-xl font-body text-lg leading-relaxed text-muted-foreground">
+              We bring traditional Indian games to your school, office, festival, or community. Get in touch to design a format that fits.
+            </p>
+            <div className="flex flex-col items-center gap-4 pt-4 sm:flex-row sm:justify-center">
+              <Button to="/collaborate" className="rounded-full px-10 py-3 text-base">Collaborate with us</Button>
+              <Button
+                href="https://rollthedice.in/pages/events"
+                variant="secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full px-10 py-3 text-base"
+              >
+                All events →
+              </Button>
             </div>
           </div>
-        </section>
-      </Reveal>
-
+        </div>
+      </section>
     </SiteLayout>
   )
 }

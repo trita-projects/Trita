@@ -1,10 +1,8 @@
 import * as React from "react"
-
+import { motion } from "framer-motion"
 import SiteLayout from "../layouts/SiteLayout"
 import Seo from "../components/Seo"
 import Button from "../components/ui/Button"
-
-// ─── Data ────────────────────────────────────────────────────────────────────
 
 const awards = [
   {
@@ -89,52 +87,6 @@ const galleryImages = [
   },
 ]
 
-// ─── Scroll animation hook ────────────────────────────────────────────────────
-
-function useReveal(threshold = 0.15) {
-  const ref = React.useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = React.useState(false)
-
-  React.useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect() } },
-      { threshold }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [threshold])
-
-  return { ref, visible }
-}
-
-function Reveal({
-  children,
-  delay = 0,
-  className = "",
-}: {
-  children: React.ReactNode
-  delay?: number
-  className?: string
-}) {
-  const { ref, visible } = useReveal()
-  return (
-    <div
-      ref={ref}
-      className={className}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(28px)",
-        transition: `opacity 0.65s ease ${delay}ms, transform 0.65s ease ${delay}ms`,
-      }}
-    >
-      {children}
-    </div>
-  )
-}
-
-
 export default function MediaPage() {
   const [activeFilter, setActiveFilter] = React.useState(`All`)
   const filters = [`All`, `Board Games`, `Workshops`, `Events`, `Family Moments`]
@@ -144,251 +96,212 @@ export default function MediaPage() {
 
   return (
     <SiteLayout>
-      <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-8px); }
-        }
-        @keyframes pulse-soft {
-          0%, 100% { opacity: 0.6; }
-          50% { opacity: 1; }
-        }
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee { animation: marquee 28s linear infinite; }
-        .animate-float { animation: float 4s ease-in-out infinite; }
-      `}</style>
-
       {/* ── Hero header ── */}
-      <header className="relative space-y-4 overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white px-8 py-14 shadow-soft text-center sm:px-16">
-        <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-marigold-500/20 blur-3xl" />
-        <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-indigo-600/15 blur-3xl" />
+      <header className="relative space-y-4 overflow-hidden rounded-3xl border border-border bg-card px-8 py-16 shadow-soft text-center sm:px-16">
+        <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-secondary/10 blur-3xl" />
         <div className="relative space-y-4">
-          <div
-            className="inline-block rounded-full border border-ink-950/[0.08] bg-sand-50 px-4 py-1.5 font-ui text-xs font-semibold uppercase tracking-widest text-ink-950/40"
-            style={{ animation: "pulse-soft 3s ease-in-out infinite" }}
-          >
+          <div className="inline-block rounded-full border border-border bg-surface-warm px-4 py-1.5 font-body text-[10px] font-bold uppercase tracking-widest text-primary">
             Press · Awards · Gallery
           </div>
-          <h1 className="font-display text-5xl font-bold tracking-tight text-ink-950 sm:text-6xl">
-            Media &{" "}
-            <span className="text-ink-950">Recognition</span>
+          <h1 className="font-heading text-5xl font-bold tracking-tight text-foreground sm:text-6xl">
+            Media & <span className="text-primary italic">Recognition</span>
           </h1>
-          <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-ink-950/65">
+          <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-muted-foreground">
             News features, awards, press coverage, and moments from our workshops, events, and cultural celebrations.
           </p>
         </div>
       </header>
 
-      {/* ── Scrolling marquee strip ── */}
-      <div className="mt-10 overflow-hidden rounded-2xl border border-ink-950/[0.08] bg-sand-50 py-3">
-        <div className="flex animate-marquee whitespace-nowrap">
-          {[...Array(2)].map((_, ri) => (
-            <span key={ri} className="flex items-center">
-              {[`Startup Karnataka Elevate`, `The Better India`, `CNN News18`, `Dinamalar`, `Traditional Games Revival`, `Cultural Heritage`, `Play & Learning`, `Indian Board Games`].map((item, i) => (
-                <span key={i} className="mx-6 font-ui text-xs font-semibold uppercase tracking-widest text-ink-950/35">
-                  {item}
-                  <span className="ml-6 text-marigold-500">◆</span>
-                </span>
-              ))}
-            </span>
-          ))}
-        </div>
-      </div>
-
       {/* ── Awards ── */}
-      <section className="mt-16">
-        <Reveal>
-          <h2 className="font-heading text-3xl font-bold text-ink-950">Awards & Recognition</h2>
-          <p className="mt-2 font-body text-base leading-relaxed text-ink-950/65">
-            Milestones that mark our journey reviving India's gaming heritage.
-          </p>
-        </Reveal>
+      <section className="mt-24">
+        <h2 className="font-heading text-3xl font-bold text-foreground">Awards & Recognition</h2>
+        <p className="mt-2 font-body text-base leading-relaxed text-muted-foreground">
+          Milestones that mark our journey reviving India's gaming heritage.
+        </p>
 
-        <div className="mt-8 space-y-6">
-          {awards.map((award, i) => (
-            <Reveal key={award.title} delay={i * 100}>
-              <a
-                href={award.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft transition-all duration-300 active:scale-[0.99] lg:hover:shadow-md no-underline md:flex-row"
-              >
-                {award.image && (
-                  <div className="relative h-52 flex-shrink-0 overflow-hidden bg-sand-50 md:h-auto md:w-72">
-                    <img
-                      src={award.image}
-                      alt={award.title}
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-                )}
-                <div className="flex flex-col justify-between gap-4 p-7 md:p-8">
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-3">
-                      <span className="rounded-full bg-marigold-500/15 px-3 py-0.5 font-ui text-xs font-semibold tracking-wide text-marigold-600">
-                        🏆 Award
-                      </span>
-                      <span className="font-ui text-xs text-ink-950/35">{award.year}</span>
-                    </div>
-                    <h3 className="font-heading text-2xl font-bold text-ink-950 transition group-hover:text-marigold-600">
-                      {award.title}
-                    </h3>
-                    <p className="font-caption text-sm leading-relaxed text-ink-950/65 max-w-2xl">{award.desc}</p>
-                  </div>
-                  <span className="font-ui text-sm font-semibold text-ink-950/40 transition group-hover:text-ink-950">
-                    Read more →
-                  </span>
+        <div className="mt-10 space-y-8">
+          {awards.map((award) => (
+            <motion.a
+              key={award.title}
+              href={award.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all duration-300 hover:shadow-lift hover:border-primary/40 no-underline md:flex-row"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              {award.image && (
+                <div className="relative h-52 flex-shrink-0 overflow-hidden bg-surface-warm md:h-auto md:w-80">
+                  <img
+                    src={award.image}
+                    alt={award.title}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
                 </div>
-              </a>
-            </Reveal>
+              )}
+              <div className="flex flex-col justify-between gap-6 p-8 md:p-10">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <span className="rounded-full bg-primary/10 px-3 py-0.5 font-body text-[10px] font-bold uppercase tracking-widest text-primary">
+                      🏆 Award
+                    </span>
+                    <span className="font-body text-xs font-bold text-muted-foreground/50">{award.year}</span>
+                  </div>
+                  <h3 className="font-heading text-2xl font-bold text-foreground transition group-hover:text-primary">
+                    {award.title}
+                  </h3>
+                  <p className="font-body text-sm leading-relaxed text-muted-foreground max-w-2xl">{award.desc}</p>
+                </div>
+                <span className="font-body text-sm font-bold text-primary transition group-hover:opacity-80">
+                  Read more →
+                </span>
+              </div>
+            </motion.a>
           ))}
         </div>
       </section>
 
       {/* ── Press Features ── */}
-      <section className="mt-16">
-        <Reveal>
-          <h2 className="font-heading text-3xl font-bold text-ink-950">In the Press</h2>
-          <p className="mt-2 font-body text-base leading-relaxed text-ink-950/65">
-            Features, interviews, and stories from media outlets across India.
-          </p>
-        </Reveal>
+      <section className="mt-24">
+        <h2 className="font-heading text-3xl font-bold text-foreground">In the Press</h2>
+        <p className="mt-2 font-body text-base leading-relaxed text-muted-foreground">
+          Features, interviews, and stories from media outlets across India.
+        </p>
 
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 grid gap-8 md:grid-cols-3">
           {pressFeatures.map((item, i) => (
-            <Reveal key={item.title} delay={i * 80}>
-              <a
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex h-full flex-col overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft transition-all duration-300 active:scale-[0.98] lg:hover:shadow-md no-underline"
-              >
-                {item.image && (
-                  <div className="relative h-40 overflow-hidden bg-sand-50">
-                    <img
-                      src={item.image}
-                      alt={item.outlet}
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-                )}
-                {!item.image && (
-                  <div className="flex h-24 items-center justify-center bg-sand-50 px-6">
-                    <span className="font-display text-xl font-bold text-ink-950/20">{item.outlet}</span>
-                  </div>
-                )}
-                <div className="flex flex-1 flex-col justify-between gap-4 p-6">
-                  <div className="space-y-1.5">
-                    <div className="flex items-center gap-2">
-                      <span className="rounded-full border border-ink-950/[0.12] px-2.5 py-0.5 font-ui text-xs tracking-wide text-ink-950/45">
-                        {item.tag}
-                      </span>
-                      <span className="font-ui text-xs font-semibold text-ink-950/40">{item.outlet}</span>
-                    </div>
-                    <h3 className="font-heading text-base font-bold text-ink-950 transition group-hover:text-marigold-600">
-                      {item.title}
-                    </h3>
-                    <p className="font-caption text-sm leading-relaxed text-ink-950/60">{item.desc}</p>
-                  </div>
-                  <span className="font-ui text-sm font-semibold text-ink-950/35 transition group-hover:text-ink-950">
-                    Read feature →
-                  </span>
+            <motion.a
+              key={item.title}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all duration-300 hover:shadow-lift hover:border-primary/40 no-underline"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+            >
+              {item.image && (
+                <div className="relative h-48 overflow-hidden bg-surface-warm">
+                  <img
+                    src={item.image}
+                    alt={item.outlet}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
                 </div>
-              </a>
-            </Reveal>
+              )}
+              {!item.image && (
+                <div className="flex h-32 items-center justify-center bg-surface-warm px-8">
+                  <span className="font-display text-2xl font-bold text-primary/10">{item.outlet}</span>
+                </div>
+              )}
+              <div className="flex flex-1 flex-col justify-between gap-6 p-8">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <span className="rounded-full border border-border bg-muted/10 px-3 py-0.5 font-body text-[10px] font-bold uppercase tracking-wide text-muted-foreground">
+                      {item.tag}
+                    </span>
+                    <span className="font-body text-xs font-bold text-muted-foreground/50">{item.outlet}</span>
+                  </div>
+                  <h3 className="font-heading text-lg font-bold text-foreground transition group-hover:text-primary leading-snug">
+                    {item.title}
+                  </h3>
+                  <p className="font-body text-sm leading-relaxed text-muted-foreground line-clamp-3">{item.desc}</p>
+                </div>
+                <span className="font-body text-sm font-bold text-primary transition group-hover:opacity-80">
+                  Read feature →
+                </span>
+              </div>
+            </motion.a>
           ))}
         </div>
       </section>
 
       {/* ── Photo Gallery ── */}
-      <section className="mt-16">
-        <Reveal>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <h2 className="font-heading text-3xl font-bold text-ink-950">Our Story in Pictures</h2>
-              <p className="mt-2 font-body text-base leading-relaxed text-ink-950/65">
-                Moments from workshops, family game nights, and cultural celebrations.
-              </p>
-            </div>
+      <section className="mt-24">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <h2 className="font-heading text-3xl font-bold text-foreground">Our Story in Pictures</h2>
+            <p className="mt-2 font-body text-base leading-relaxed text-muted-foreground">
+              Moments from workshops, family game nights, and cultural celebrations.
+            </p>
           </div>
-        </Reveal>
-
-        {/* Filter pills */}
-        <Reveal delay={100}>
-          <div className="mt-6 flex flex-wrap gap-2">
+          {/* Filter pills */}
+          <div className="flex flex-wrap gap-2">
             {filters.map(f => (
               <button
                 key={f}
                 onClick={() => setActiveFilter(f)}
-                className={`rounded-2xl border px-4 py-2 font-ui text-sm font-semibold transition-all duration-200 ${
+                className={`rounded-full border px-5 py-2 font-body text-xs font-bold transition-all duration-200 ${
                   activeFilter === f
-                    ? "border-ink-950 bg-ink-950 text-white"
-                    : "border-ink-950/[0.08] bg-white text-ink-950/60 shadow-soft hover:bg-sand-50 hover:text-ink-950"
+                    ? "border-primary bg-primary text-white"
+                    : "border-border bg-card text-muted-foreground shadow-soft hover:border-primary/40 hover:text-primary"
                 }`}
               >
                 {f}
               </button>
             ))}
           </div>
-        </Reveal>
+        </div>
 
         {/* Masonry-style grid */}
-        <div className="mt-8 columns-2 gap-4 md:columns-3 lg:columns-4">
+        <div className="mt-10 columns-2 gap-6 md:columns-3 lg:columns-4">
           {filteredGallery.map((img, i) => (
-            <Reveal key={img.src} delay={i * 50}>
-              <div className="group mb-4 break-inside-avoid overflow-hidden rounded-2xl border border-ink-950/[0.08] bg-sand-50 shadow-soft transition-shadow duration-300 hover:shadow-md">
-                <div className="relative overflow-hidden">
-                  <img
-                    src={img.src}
-                    alt={img.alt}
-                    className="w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 flex items-end bg-gradient-to-t from-ink-950/40 to-transparent p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <span className="rounded-xl bg-white/90 px-2.5 py-1 font-ui text-xs font-semibold text-ink-950">
-                      {img.tag}
-                    </span>
-                  </div>
+            <motion.div
+              key={img.src}
+              className="group mb-6 break-inside-avoid overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all duration-300 hover:shadow-lift hover:border-primary/40"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.05 }}
+            >
+              <div className="relative overflow-hidden">
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className="w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/60 to-transparent p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <span className="rounded-full bg-white/90 px-3 py-1 font-body text-[10px] font-bold uppercase tracking-wider text-black">
+                    {img.tag}
+                  </span>
                 </div>
               </div>
-            </Reveal>
+            </motion.div>
           ))}
         </div>
       </section>
 
       {/* ── CTA ── */}
-      <Reveal>
-        <section className="mt-16">
-          <div className="relative overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white p-8 shadow-soft text-center sm:p-12">
-            <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-marigold-500/20 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-16 -left-16 h-64 w-64 rounded-full bg-indigo-600/15 blur-3xl" />
-            <div className="relative space-y-4">
-              <h2 className="font-display text-3xl font-bold text-ink-950 sm:text-4xl">
-                Want to feature us?
-              </h2>
-              <p className="mx-auto max-w-lg font-body text-base leading-relaxed text-ink-950/65">
-                For press inquiries, media kits, or collaboration requests — reach out to our team directly.
-              </p>
-              <div className="flex flex-col items-center gap-3 pt-2 sm:flex-row sm:justify-center">
-                <Button to="/contact" className="px-8 py-3 text-base">Get in touch</Button>
-                <Button
-                  href="https://rollthedice.in/pages/press-awards"
-                  variant="secondary"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-3 text-base"
-                >
-                  Full press page →
-                </Button>
-              </div>
+      <section className="mt-24">
+        <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-12 text-center shadow-soft sm:p-20">
+          <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-20 -left-20 h-80 w-80 rounded-full bg-secondary/10 blur-3xl" />
+          <div className="relative space-y-6">
+            <h2 className="font-heading text-4xl font-bold text-foreground sm:text-5xl">
+              Want to <span className="text-primary italic">feature</span> us?
+            </h2>
+            <p className="mx-auto max-w-xl font-body text-lg leading-relaxed text-muted-foreground">
+              For press inquiries, media kits, or collaboration requests — reach out to our team directly.
+            </p>
+            <div className="flex flex-col items-center gap-4 pt-4 sm:flex-row sm:justify-center">
+              <Button to="/contact" className="rounded-full px-10 py-3 text-base">Get in touch</Button>
+              <Button
+                href="https://rollthedice.in/pages/press-awards"
+                variant="secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full px-10 py-3 text-base"
+              >
+                Full press page →
+              </Button>
             </div>
           </div>
-        </section>
-      </Reveal>
-
+        </div>
+      </section>
     </SiteLayout>
   )
 }

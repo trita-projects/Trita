@@ -1,6 +1,6 @@
 import * as React from "react"
-
-import Card from "../../components/ui/Card"
+import { useRef } from "react"
+import { motion, useInView } from "framer-motion"
 import Button from "../../components/ui/Button"
 
 const items = [
@@ -28,63 +28,84 @@ const items = [
 ]
 
 export default function EcosystemSection() {
-  return (
-    <section className="mt-14">
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
 
-      <div className="flex items-end justify-between gap-6">
-        <div>
-          <h2 className="font-heading text-3xl font-bold text-ink-950">Our Ecosystem</h2>
-          <p className="mt-3 max-w-2xl font-body text-base leading-relaxed text-ink-950/70">
-            A family of brands and programs built to make culture accessible, joyful, and relevant.
-          </p>
+  return (
+    <section ref={ref} className="relative py-8 px-4 sm:px-6">
+      <div className="mx-auto max-w-6xl">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="text-sm font-body uppercase tracking-[0.3em] text-muted-foreground">Our Brands</p>
+            <h2 className="mt-3 font-heading text-3xl font-bold text-foreground sm:text-5xl">Our Ecosystem</h2>
+            <p className="mt-4 max-w-2xl font-body text-lg leading-relaxed text-muted-foreground">
+              A family of brands and programs built to make culture accessible, joyful, and relevant.
+            </p>
+          </motion.div>
+          <motion.div
+            className="hidden md:block"
+            initial={{ opacity: 0, x: 20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <Button to="/brands" variant="secondary" className="rounded-full">
+              View all brands
+            </Button>
+          </motion.div>
         </div>
-        <div className="hidden sm:block">
-          <Button to="/brands" variant="secondary">
+
+        <div className="mt-16 grid gap-8 md:grid-cols-3">
+          {items.map((item, i) => (
+            <motion.a
+              key={item.title}
+              href={item.to}
+              className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all duration-300 hover:shadow-lift hover:border-primary/40 no-underline"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.3 + i * 0.15 }}
+            >
+              <div className="flex items-center justify-center bg-muted/30 mx-5 mt-5 px-6 py-12 rounded-2xl">
+                <img
+                  src={item.logo}
+                  alt={item.title}
+                  className="h-20 w-auto max-w-full object-contain transition-transform duration-500 group-hover:scale-110"
+                />
+              </div>
+
+              <div className="flex flex-1 flex-col justify-between gap-6 p-8">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="font-heading text-xl font-bold text-foreground transition group-hover:text-primary">
+                      {item.title}
+                    </span>
+                    <span className="font-display text-xs font-medium tracking-widest text-primary/30">
+                      {item.number}
+                    </span>
+                  </div>
+                  <p className="font-body text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
+                </div>
+                <div className="inline-flex items-center gap-2 font-body text-sm font-bold text-primary group-hover:gap-3 transition-all">
+                  Learn more <span>→</span>
+                </div>
+              </div>
+            </motion.a>
+          ))}
+        </div>
+
+        <motion.div
+          className="mt-8 md:hidden"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.6 }}
+        >
+          <Button to="/brands" variant="secondary" className="w-full rounded-full">
             View all brands
           </Button>
-        </div>
-      </div>
-
-      <div className="mt-8 grid gap-6 md:grid-cols-3">
-        {items.map(item => (
-          <a
-            key={item.title}
-            href={item.to}
-            className="group flex flex-col overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft transition-all duration-300 active:scale-[0.98] lg:hover:shadow-lift no-underline"
-          >
-            <div className="flex items-center justify-center rounded-2xl bg-sand-50 mx-5 mt-5 px-6 py-8">
-              <img
-                src={item.logo}
-                alt={item.title}
-                className="h-20 w-auto max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-
-            <div className="flex flex-1 flex-col justify-between gap-4 p-5">
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <span className="font-ui text-xl font-bold text-ink-950 transition group-hover:text-marigold-600">
-                    {item.title}
-                  </span>
-                  <span className="font-ui text-xs font-medium tracking-widest text-ink-950/25">
-                    {item.number}
-                  </span>
-                </div>
-                <p className="font-caption text-sm leading-relaxed text-ink-950/65">{item.desc}</p>
-              </div>
-              <Button to={item.to} variant="ghost" className="w-fit px-0 font-ui text-sm font-bold shadow-none">
-                Learn more
-              </Button>
-            </div>
-          </a>
-        ))}
-      </div>
-
-
-      <div className="mt-6 sm:hidden">
-        <Button to="/brands" variant="secondary">
-          View all brands
-        </Button>
+        </motion.div>
       </div>
     </section>
   )

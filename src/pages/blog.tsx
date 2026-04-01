@@ -1,7 +1,8 @@
 import * as React from "react"
-
+import { motion } from "framer-motion"
 import SiteLayout from "../layouts/SiteLayout"
 import Seo from "../components/Seo"
+import Button from "../components/ui/Button"
 
 type Article = {
   id: number
@@ -30,13 +31,16 @@ function BlogCard({ article, featured = false }: { article: Article; featured?: 
 
   if (featured) {
     return (
-      <a
+      <motion.a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="group col-span-full flex flex-col overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft transition-all duration-300 active:scale-[0.99] lg:hover:shadow-md no-underline md:flex-row"
+        className="group col-span-full flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all duration-300 hover:shadow-lift hover:border-primary/40 no-underline md:flex-row"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
       >
-        <div className="relative h-56 flex-shrink-0 overflow-hidden bg-sand-50 md:h-auto md:w-80 lg:w-96">
+        <div className="relative h-56 flex-shrink-0 overflow-hidden bg-surface-warm md:h-auto md:w-80 lg:w-96">
           {article.image ? (
             <img
               src={article.image}
@@ -44,40 +48,43 @@ function BlogCard({ article, featured = false }: { article: Article; featured?: 
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center bg-sand-100">
-              <span className="font-ui text-xs text-ink-950/25">Roll the Dice</span>
+            <div className="flex h-full w-full items-center justify-center bg-muted/20">
+              <span className="font-body text-xs text-muted-foreground/40">Roll the Dice</span>
             </div>
           )}
         </div>
-        <div className="flex flex-col justify-between gap-4 p-7 md:p-8">
-          <div className="space-y-2">
+        <div className="flex flex-col justify-between gap-6 p-8 md:p-10">
+          <div className="space-y-3">
             <div className="flex items-center gap-3">
-              <span className="rounded-full border border-ink-950/[0.12] px-3 py-0.5 font-ui text-xs tracking-wide text-ink-950/45">
+              <span className="rounded-full border border-border bg-primary/10 px-3 py-0.5 font-body text-[10px] font-bold uppercase tracking-wider text-primary">
                 Latest
               </span>
-              <span className="font-ui text-xs text-ink-950/35">{formatDate(article.published_at)}</span>
+              <span className="font-body text-xs font-bold text-muted-foreground/50">{formatDate(article.published_at)}</span>
             </div>
-            <h2 className="font-heading text-2xl font-bold text-ink-950 transition group-hover:text-marigold-600 sm:text-3xl">
+            <h2 className="font-heading text-2xl font-bold text-foreground transition group-hover:text-primary sm:text-3xl">
               {article.title}
             </h2>
-            <p className="font-caption text-sm leading-relaxed text-ink-950/65">{article.excerpt}…</p>
+            <p className="font-body text-sm leading-relaxed text-muted-foreground">{article.excerpt}…</p>
           </div>
-          <span className="font-ui text-sm font-semibold text-ink-950/40 transition group-hover:text-ink-950">
+          <span className="font-body text-sm font-bold text-primary transition group-hover:opacity-80">
             Read on Roll the Dice →
           </span>
         </div>
-      </a>
+      </motion.a>
     )
   }
 
   return (
-    <a
+    <motion.a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft transition-all duration-300 active:scale-[0.98] lg:hover:shadow-md no-underline"
+      className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all duration-300 hover:shadow-lift hover:border-primary/40 no-underline"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
     >
-      <div className="relative mx-5 mt-5 overflow-hidden rounded-2xl bg-sand-50" style={{ aspectRatio: "16/9" }}>
+      <div className="relative mx-5 mt-5 overflow-hidden rounded-2xl bg-surface-warm" style={{ aspectRatio: "16/9" }}>
         {article.image ? (
           <img
             src={article.image}
@@ -85,36 +92,36 @@ function BlogCard({ article, featured = false }: { article: Article; featured?: 
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-sand-100">
-            <span className="font-ui text-xs text-ink-950/25">Roll the Dice</span>
+          <div className="flex h-full w-full items-center justify-center bg-muted/20">
+            <span className="font-body text-xs text-muted-foreground/40">Roll the Dice</span>
           </div>
         )}
       </div>
-      <div className="flex flex-1 flex-col justify-between gap-4 p-5">
-        <div className="space-y-1.5">
-          <span className="font-ui text-xs text-ink-950/35">{formatDate(article.published_at)}</span>
-          <h3 className="font-heading text-lg font-bold text-ink-950 transition group-hover:text-marigold-600">
+      <div className="flex flex-1 flex-col justify-between gap-6 p-6">
+        <div className="space-y-2">
+          <span className="font-body text-xs font-bold text-muted-foreground/50">{formatDate(article.published_at)}</span>
+          <h3 className="font-heading text-lg font-bold text-foreground transition group-hover:text-primary leading-snug">
             {article.title}
           </h3>
-          <p className="font-caption text-sm leading-relaxed text-ink-950/65">{article.excerpt}…</p>
+          <p className="font-body text-sm leading-relaxed text-muted-foreground line-clamp-3">{article.excerpt}…</p>
         </div>
-        <span className="font-ui text-sm font-semibold text-ink-950/40 transition group-hover:text-ink-950">
+        <span className="font-body text-sm font-bold text-primary transition group-hover:opacity-80">
           Read on Roll the Dice →
         </span>
       </div>
-    </a>
+    </motion.a>
   )
 }
 
 function SkeletonCard() {
   return (
-    <div className="overflow-hidden rounded-3xl border border-ink-950/[0.08] bg-white shadow-soft">
-      <div className="mx-5 mt-5 animate-pulse rounded-2xl bg-sand-100" style={{ aspectRatio: "16/9" }} />
-      <div className="space-y-2.5 p-5">
-        <div className="h-3 w-1/4 animate-pulse rounded-full bg-sand-100" />
-        <div className="h-5 w-3/4 animate-pulse rounded-full bg-sand-100" />
-        <div className="h-3 w-full animate-pulse rounded-full bg-sand-100" />
-        <div className="h-3 w-2/3 animate-pulse rounded-full bg-sand-100" />
+    <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-soft">
+      <div className="mx-5 mt-5 animate-pulse rounded-2xl bg-muted/20" style={{ aspectRatio: "16/9" }} />
+      <div className="space-y-3 p-6">
+        <div className="h-3 w-1/4 animate-pulse rounded-full bg-muted/20" />
+        <div className="h-6 w-3/4 animate-pulse rounded-full bg-muted/20" />
+        <div className="h-3 w-full animate-pulse rounded-full bg-muted/20" />
+        <div className="h-3 w-2/3 animate-pulse rounded-full bg-muted/20" />
       </div>
     </div>
   )
@@ -127,8 +134,6 @@ export default function BlogIndexPage() {
   React.useEffect(() => {
     const fetchBlogPosts = async () => {
       try {
-        // In development, Gatsby serves API functions during dev server
-        // In production build, we need to handle the fact that API isn't available during build
         const response = await fetch("/api/blog-posts")
         
         if (!response.ok) {
@@ -140,13 +145,11 @@ export default function BlogIndexPage() {
         setArticles(posts)
         setStatus(posts.length > 0 ? "success" : "error")
       } catch (error) {
-        // During build time or if API fails, show error state
         console.warn("Failed to fetch blog posts:", error)
         setStatus("error")
       }
     }
 
-    // Only fetch on client-side, not during SSR/build
     if (typeof window !== 'undefined') {
       fetchBlogPosts()
     }
@@ -156,63 +159,57 @@ export default function BlogIndexPage() {
 
   return (
     <SiteLayout>
-      {/* Header */}
       <header className="space-y-4 text-center">
-        <h1 className="font-display text-5xl font-bold tracking-tight text-ink-950">Blog</h1>
-        <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-ink-950/70">
+        <h1 className="font-heading text-5xl font-bold tracking-tight text-foreground">Blog</h1>
+        <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-muted-foreground">
           Stories behind Indian games, culture and play, parenting, strategy, and festival traditions — from the Roll the Dice team.
         </p>
       </header>
 
-      <section className="mt-12">
-
-        {/* Loading skeletons */}
+      <section className="mt-16">
         {status === "loading" && (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)}
           </div>
         )}
 
-        {/* Error fallback */}
         {status === "error" && (
-          <div className="flex flex-col items-center gap-4 rounded-3xl border border-ink-950/[0.08] bg-white p-12 text-center shadow-soft">
-            <p className="font-body text-base text-ink-950/60">
+          <div className="flex flex-col items-center gap-6 rounded-3xl border border-border bg-card p-12 text-center shadow-soft">
+            <p className="font-body text-base text-muted-foreground">
               Couldn't load posts right now. Read all articles directly on Roll the Dice.
             </p>
-            <a
+            <Button
               href="https://rollthedice.in/blogs/talk"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-2xl border border-ink-950/[0.08] bg-sand-50 px-5 py-2.5 font-ui text-sm font-semibold text-ink-950 no-underline transition hover:bg-sand-100"
+              className="rounded-full px-8 py-2.5 text-sm"
             >
               Visit the blog →
-            </a>
+            </Button>
           </div>
         )}
 
-        {/* Posts grid */}
         {status === "success" && (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {featured && <BlogCard article={featured} featured />}
-            {rest.map(article => (
+            {rest.map((article, i) => (
               <BlogCard key={article.id} article={article} />
             ))}
           </div>
         )}
-
       </section>
 
-      {/* Footer CTA */}
       {status === "success" && (
-        <div className="mt-10 flex justify-center">
-          <a
+        <div className="mt-12 flex justify-center">
+          <Button
             href="https://rollthedice.in/blogs/talk"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-2xl border border-ink-950/[0.08] bg-white px-6 py-3 font-ui text-sm font-semibold text-ink-950/60 shadow-soft no-underline transition hover:bg-sand-50 hover:text-ink-950"
+            variant="secondary"
+            className="rounded-full px-8 py-3 text-sm"
           >
             View all posts on Roll the Dice →
-          </a>
+          </Button>
         </div>
       )}
     </SiteLayout>

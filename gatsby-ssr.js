@@ -27,7 +27,7 @@ exports.onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
     />,
     <link
       key="google-fonts"
-      href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Baloo+2:wght@400;600;800&family=Lora:ital,wght@0,400;0,600;1,400&family=Vesper+Libre:wght@400;700;900&family=Karma:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..800;1,400..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
       rel="stylesheet"
     />,
   ])

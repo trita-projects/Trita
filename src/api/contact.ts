@@ -53,12 +53,12 @@ export default async function handler(req: GatsbyFunctionRequest, res: GatsbyFun
 
   const subject = `New Contact Form Submission — ${name}`;
   const html = `
-    <div style="font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #07060a;">
+    <div style="font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #2d2724;">
       <h2 style="margin: 0 0 12px;">New Contact Form Submission</h2>
       <p style="margin: 0 0 6px;"><strong>Name:</strong> ${escapeHtml(name)}</p>
       <p style="margin: 0 0 6px;"><strong>Email:</strong> ${escapeHtml(email)}</p>
       <p style="margin: 0 0 6px;"><strong>Phone:</strong> ${escapeHtml(phone || "—")}</p>
-      <hr style="border: 0; border-top: 1px solid rgba(7,6,10,0.12); margin: 12px 0;" />
+      <hr style="border: 0; border-top: 1px solid rgba(45,39,36,0.12); margin: 12px 0;" />
       <p style="white-space: pre-wrap; margin: 0;">${escapeHtml(message)}</p>
     </div>
   `.trim();
