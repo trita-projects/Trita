@@ -211,12 +211,12 @@ export default function ProductsPage() {
       </header>
 
       {/* Section nav */}
-      <nav className="mt-10 flex flex-wrap gap-2">
+      <nav className="mt-10 flex flex-wrap justify-center gap-2">
         {sections.map(s => (
           <button
             key={s.id}
             onClick={() => scrollTo(s.id)}
-            className="rounded-2xl border border-ink-950/[0.08] bg-white px-4 py-2 font-ui text-sm font-semibold text-ink-950/60 shadow-soft transition-all active:bg-sand-50 active:text-ink-950 lg:hover:bg-sand-50 lg:hover:text-ink-950"
+            className="rounded-full border border-border bg-card px-5 py-2 font-body text-xs font-bold text-muted-foreground shadow-soft transition-all hover:border-primary/40 hover:text-primary active:scale-95"
           >
             {s.label}
           </button>
