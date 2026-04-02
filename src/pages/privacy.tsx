@@ -189,7 +189,7 @@ export default function PrivacyPage() {
                   key={row.label}
                   className={`flex flex-col gap-0.5 px-8 py-5 sm:flex-row sm:gap-8 ${i !== arr.length - 1 ? "border-b border-border" : ""}`}
                 >
-                  <span className="w-24 flex-shrink-0 font-display text-[10px] font-bold uppercase tracking-widest text-primary">
+                  <span className="w-24 flex-shrink-0 font-display text-[12px] font-bold uppercase tracking-widest">
                     {row.label}
                   </span>
                   {row.href ? (
