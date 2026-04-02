@@ -164,13 +164,13 @@ export default function ContactPage() {
             <h3 className="font-heading text-lg font-bold text-foreground">Direct Contact</h3>
             <div className="mt-4 space-y-3">
               <div className="flex flex-col gap-1">
-                <span className="font-display text-[10px] uppercase tracking-widest text-primary/50 font-bold">Email</span>
+                <span className="font-display text-[10px] uppercase tracking-widest font-bold">Email</span>
                 <a href="mailto:namaste@trita.in" className="font-body text-base font-bold text-primary hover:opacity-80">
                   namaste@trita.in
                 </a>
               </div>
               <div className="flex flex-col gap-1">
-                <span className="font-display text-[10px] uppercase tracking-widest text-primary/50 font-bold">Phone</span>
+                <span className="font-display text-[10px] uppercase tracking-widest font-bold">Phone</span>
                 <a href="tel:+919342184698" className="font-body text-base font-bold text-primary hover:opacity-80">
                   +91 93421 84698
                 </a>
